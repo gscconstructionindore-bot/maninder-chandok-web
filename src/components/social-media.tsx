@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 interface ReelData {
     id: number;
@@ -19,21 +19,27 @@ const reels: ReelData[] = [
     },
     {
         id: 2,
-        platform: "youtube",
-        embedUrl: "https://www.youtube.com/embed/tBm302qL4hA",
-        title: "Corporate Excellence Series",
+        platform: "instagram",
+        embedUrl: "https://www.instagram.com/reel/DRyg7NyAioG/embed",
+        title: "Professional Development Tips"
     },
     {
         id: 3,
         platform: "instagram",
-        embedUrl: "https://www.instagram.com/reel/DRyg7NyAioG/embed",
-        title: "Professional Development Tips",
+        embedUrl: "https://www.instagram.com/reel/DQHElafiecM/embed",
+        title: "Leadership Training",
     },
     {
         id: 4,
-        platform: "youtube",
-        embedUrl: "https://www.youtube.com/embed/yV9YJ2XFiVw",
-        title: "Leadership Masterclass",
+        platform: "instagram",
+        embedUrl: "https://www.instagram.com/reel/DSQLKOqAk0F/embed",
+        title: "Life Coaching",
+    },
+    {
+        id: 5,
+        platform: "instagram",
+        embedUrl: "https://www.instagram.com/reel/DRrVfNDCo1O/embed",
+        title: "Daily Inspiration",
     },
 ];
 
@@ -92,269 +98,178 @@ const platformIconsWhite = {
 };
 
 export default function SocialMedia() {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const itemsPerView = 3;
+    const maxSlides = Math.max(0, reels.length - itemsPerView);
+
+    useEffect(() => {
+        // Load Instagram embed script
+        const script = document.createElement('script');
+        script.src = '//www.instagram.com/embed.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            // Cleanup script on unmount
+            if (script.parentNode) {
+                script.parentNode.removeChild(script);
+            }
+        };
+    }, []);
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => Math.min(prev + 1, maxSlides));
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+    };
 
     return (
-        <section className="relative overflow-hidden w-full bg-gray-50 dark:bg-gray-900">
-            {/* Rich vibrant background elements */}
+        <section className="relative overflow-hidden w-full bg-white dark:bg-gray-950">
+            {/* Subtle premium background */}
             <div className="absolute inset-0 -z-10">
-                {/* Rich colorful gradient orbs */}
-                <div className="absolute top-1/4 -left-20 w-[550px] h-[550px] bg-gradient-to-br from-rose-400/25 via-fuchsia-400/20 to-transparent dark:from-rose-600/18 dark:via-fuchsia-600/14 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute bottom-1/4 -right-20 w-[650px] h-[650px] bg-gradient-to-tl from-violet-400/20 via-purple-400/15 to-transparent dark:from-violet-600/15 dark:via-purple-600/12 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-                <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-gradient-to-br from-pink-400/15 to-transparent dark:from-pink-600/12 rounded-full blur-2xl" />
+                {/* Minimal gradient orbs */}
+                <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-fuchsia-500/8 to-transparent dark:from-fuchsia-500/5 rounded-full blur-3xl" />
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-violet-500/8 to-transparent dark:from-violet-500/5 rounded-full blur-3xl" />
                 
-                {/* Rich wave pattern */}
-                <div className="absolute inset-0 opacity-40 dark:opacity-25" style={{
-                    backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(236, 72, 153, 0.12) 35px, rgba(236, 72, 153, 0.12) 70px)'
-                }} />
-                
-                {/* Social media inspired shapes */}
-                <div className="absolute top-40 right-1/4 w-16 h-16 border-[3px] border-fuchsia-400/45 dark:border-fuchsia-500/35 rounded-xl rotate-12 shadow-lg shadow-fuchsia-500/10" />
-                <div className="absolute bottom-40 left-1/4 w-20 h-20 border-[3px] border-rose-400/45 dark:border-rose-500/35 rounded-full shadow-lg shadow-rose-500/10" />
-                <div className="absolute top-1/2 right-1/3 w-12 h-12 border-[3px] border-violet-400/45 dark:border-violet-500/35 rounded-lg -rotate-12 shadow-lg shadow-violet-500/10" />
-                
-                {/* Rich accent lines */}
-                <div className="absolute top-0 left-1/3 w-1.5 h-56 bg-gradient-to-b from-fuchsia-500/35 dark:from-fuchsia-400/25 to-transparent rounded-full" />
-                <div className="absolute bottom-0 right-1/4 w-1.5 h-48 bg-gradient-to-t from-rose-500/35 dark:from-rose-400/25 to-transparent rounded-full" />
-                
-                {/* Small vibrant accent elements */}
-                <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-fuchsia-500/50 dark:bg-fuchsia-400/40 rounded-full animate-pulse" style={{ animationDuration: '2.5s' }} />
-                <div className="absolute bottom-1/3 right-1/3 w-4 h-4 bg-rose-500/45 dark:bg-rose-400/35 rounded-full" />
-                <div className="absolute top-2/3 right-1/4 w-2.5 h-2.5 bg-violet-500/45 dark:bg-violet-400/35 rounded-full animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
-                <div className="absolute bottom-1/2 left-1/3 w-2 h-2 bg-pink-500/40 dark:bg-pink-400/30 rounded-full" />
-                
-                {/* Hashtag-inspired elements */}
-                <div className="absolute top-1/3 right-1/5 w-6 h-1 bg-fuchsia-500/20 dark:bg-fuchsia-400/15 rotate-12" />
-                <div className="absolute top-1/3 right-1/5 w-6 h-1 bg-fuchsia-500/20 dark:bg-fuchsia-400/15 rotate-12 translate-y-2" />
+                {/* Subtle top border */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-800 to-transparent" />
             </div>
             
-            <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:px-8">
-                <div className="relative z-10">
-                    {/* Section Header */}
-                    <motion.div 
-                        className="text-center space-y-4 mb-16"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        <motion.span 
-                            className="inline-block text-sm uppercase tracking-[0.25em] text-gray-500 dark:text-gray-400"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: 0.05 }}
-                        >
-                            Social Media Presence
-                        </motion.span>
-                        <motion.h2 
-                            className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 dark:text-gray-100"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: 0.1 }}
-                        >
-                            Connect With Us
-                        </motion.h2>
-                    </motion.div>
+            <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 lg:px-8">
+                {/* Section Header */}
+                <motion.div 
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                >
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-4">
+                        Latest from Instagram
+                    </h2>
+                    <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                        Watch my recent insights and motivational content
+                    </p>
+                </motion.div>
 
-                    {/* Platform Links - Minimalist */}
-                    <motion.div 
-                        className="flex flex-wrap items-center justify-center gap-4 mb-16"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.15 }}
-                    >
-                        {[
-                            { platform: "instagram", label: "Instagram", href: "https://www.instagram.com/maninderchandok/" },
-                            { platform: "youtube", label: "YouTube", href: "https://www.youtube.com/channel/UCfW56czzEdxsc3HnvYTIExw" },
-                            { platform: "facebook", label: "Facebook", href: "https://www.facebook.com/ManinderSChandok" },
-                            { platform: "twitter", label: "Twitter", href: "https://x.com/ManinderChandok" },
-                        ].map((item, index) => (
-                            <motion.a
-                                key={item.platform}
-                                href={item.href}
-                                target="_blank"
-                                className="group flex items-center gap-2 px-6 py-3 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-300 hover:shadow-lg"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <div className="w-5 h-5">
-                                    {platformIcons[item.platform as keyof typeof platformIcons]}
-                                </div>
-                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors">
-                                    {item.label}
-                                </span>
-                            </motion.a>
-                        ))}
-                    </motion.div>
-
-                    {/* Reels Showcase - Bento Grid */}
+                {/* Instagram Slider */}
+                <div className="max-w-6xl mx-auto">
                     <div className="relative">
-                        <motion.div 
-                            className="text-center mb-12"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4 }}
-                        >
-                            <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                                Featured Content
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                Explore our latest insights and training moments
-                            </p>
-                        </motion.div>
-
-                        {/* Bento Grid Layout - Symmetric & Balanced */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-                            {/* Row 1: Instagram + YouTube */}
-
-                            {/* Instagram Reel 1 - 4:5 ratio */}
-                            <motion.div
-                                className="group relative col-span-1 md:col-span-1 aspect-4/5 rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-lg shadow-fuchsia-500/10 hover:shadow-2xl hover:shadow-fuchsia-500/20 transition-all duration-300 ring-1 ring-fuchsia-200/50 dark:ring-fuchsia-900/30"
-                                onMouseEnter={() => setActiveIndex(0)}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.05 }}
-                                whileHover={{ y: -5 }}
+                        {/* Slider Container */}
+                        <div className="overflow-hidden">
+                            <motion.div 
+                                className="flex gap-6"
+                                animate={{ x: `${-currentSlide * (100 / itemsPerView + 2)}%` }}
+                                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                             >
-                                <div className={`absolute top-2 right-2 z-10 w-7 h-7 ${platformBadgeColors[reels[0].platform]} rounded-full flex items-center justify-center shadow-md`}>
-                                    <div className="w-3.5 h-3.5">
-                                        {platformIconsWhite[reels[0].platform]}
-                                    </div>
-                                </div>
-                                <iframe
-                                    src={reels[0].embedUrl}
-                                    className="absolute inset-0 w-full h-full"
-                                    frameBorder="0"
-                                    scrolling="no"
-                                    allow="encrypted-media"
-                                    title={reels[0].title}
-                                />
-                            </motion.div>
-
-                            {/* YouTube Video 1 - 16:9 ratio */}
-                            <motion.div
-                                className="group relative col-span-1 md:col-span-2 aspect-video rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-lg shadow-rose-500/10 hover:shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 ring-1 ring-rose-200/50 dark:ring-rose-900/30"
-                                onMouseEnter={() => setActiveIndex(1)}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.1 }}
-                                whileHover={{ y: -5 }}
-                            >
-                                <div className={`absolute top-2 right-2 z-10 w-7 h-7 ${platformBadgeColors[reels[1].platform]} rounded-full flex items-center justify-center shadow-md`}>
-                                    <div className="w-3.5 h-3.5">
-                                        {platformIconsWhite[reels[1].platform]}
-                                    </div>
-                                </div>
-                                <iframe
-                                    src={reels[1].embedUrl}
-                                    className="absolute inset-0 w-full h-full"
-                                    frameBorder="0"
-                                    scrolling="no"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                    title={reels[1].title}
-                                />
-                            </motion.div>
-
-                            {/* Instagram Reel 2 - 4:5 ratio */}
-                            <motion.div
-                                className="group relative col-span-1 md:col-span-1 aspect-4/5 rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-lg shadow-violet-500/10 hover:shadow-2xl hover:shadow-violet-500/20 transition-all duration-300 ring-1 ring-violet-200/50 dark:ring-violet-900/30"
-                                onMouseEnter={() => setActiveIndex(2)}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.15 }}
-                                whileHover={{ y: -5 }}
-                            >
-                                <div className={`absolute top-2 right-2 z-10 w-7 h-7 ${platformBadgeColors[reels[2].platform]} rounded-full flex items-center justify-center shadow-md`}>
-                                    <div className="w-3.5 h-3.5">
-                                        {platformIconsWhite[reels[2].platform]}
-                                    </div>
-                                </div>
-                                <iframe
-                                    src={reels[2].embedUrl}
-                                    className="absolute inset-0 w-full h-full"
-                                    frameBorder="0"
-                                    scrolling="no"
-                                    allow="encrypted-media"
-                                    title={reels[2].title}
-                                />
-                            </motion.div>
-
-                            {/* Row 2: YouTube Wide (full width) - 16:9 ratio */}
-
-                            {/* YouTube Video 2 - Full Width */}
-                            <motion.div
-                                className="group relative col-span-2 md:col-span-4 aspect-video rounded-2xl overflow-hidden bg-white dark:bg-gray-900 shadow-lg shadow-pink-500/10 hover:shadow-2xl hover:shadow-pink-500/20 transition-all duration-300 ring-1 ring-pink-200/50 dark:ring-pink-900/30"
-                                onMouseEnter={() => setActiveIndex(3)}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.2 }}
-                                whileHover={{ y: -5 }}
-                            >
-                                <div className={`absolute top-2 right-2 z-10 w-7 h-7 ${platformBadgeColors[reels[3].platform]} rounded-full flex items-center justify-center shadow-md`}>
-                                    <div className="w-3.5 h-3.5">
-                                        {platformIconsWhite[reels[3].platform]}
-                                    </div>
-                                </div>
-                                <iframe
-                                    src={reels[3].embedUrl}
-                                    className="absolute inset-0 w-full h-full"
-                                    frameBorder="0"
-                                    scrolling="no"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                    title={reels[3].title}
-                                />
+                                {reels.map((reel, index) => (
+                                    <motion.div
+                                        key={reel.id}
+                                        className="group relative flex-shrink-0 w-[calc(33.333%-16px)] aspect-[9/16] rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-500"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, margin: "-50px", amount: 0.3 }}
+                                        transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                                    >   
+                                        {/* Video Embed */}
+                                        <iframe
+                                            src={reel.embedUrl}
+                                            className="absolute inset-0 w-full h-full"
+                                            frameBorder="0"
+                                            scrolling="no"
+                                            allow="encrypted-media; autoplay; clipboard-write; gyroscope; picture-in-picture; web-share"
+                                            allowFullScreen
+                                            title={reel.title}
+                                        />
+                                        
+                                        {/* Hover Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                            <div className="absolute bottom-0 left-0 right-0 p-4">
+                                                <p className="text-white font-medium text-xs">{reel.title}</p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </motion.div>
                         </div>
 
-                        {/* Call to Action */}
-                        <motion.div 
-                            className="mt-16 text-center"
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: 0.25 }}
-                        >
-                            <motion.button 
-                                className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-fuchsia-500 to-violet-600 hover:from-fuchsia-600 hover:to-violet-700 text-white px-10 py-4 rounded-full font-medium text-lg transition-all duration-300 shadow-lg shadow-fuchsia-500/30 hover:shadow-2xl hover:shadow-fuchsia-500/40"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <span>Follow Our Journey</span>
-                                <svg
-                                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
+                        {/* Navigation Buttons */}
+                        {reels.length > itemsPerView && (
+                            <>
+                                <button
+                                    onClick={prevSlide}
+                                    disabled={currentSlide === 0}
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center group hover:scale-110"
+                                    aria-label="Previous slide"
                                 >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </motion.button>
-                            <motion.p 
-                                className="mt-4 text-sm text-gray-600 dark:text-gray-400"
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.35 }}
-                            >
-                                Join our community and stay updated with the latest insights
-                            </motion.p>
-                        </motion.div>
+                                    <svg className="w-5 h-5 text-gray-900 dark:text-white transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                
+                                <button
+                                    onClick={nextSlide}
+                                    disabled={currentSlide === maxSlides}
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center group hover:scale-110"
+                                    aria-label="Next slide"
+                                >
+                                    <svg className="w-5 h-5 text-gray-900 dark:text-white transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
                     </div>
+
+                    {/* Slider Indicators */}
+                    {reels.length > itemsPerView && (
+                        <div className="flex justify-center gap-2 mt-8">
+                            {Array.from({ length: maxSlides + 1 }).map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentSlide(index)}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                                        currentSlide === index 
+                                            ? 'w-8 bg-gray-900 dark:bg-white' 
+                                            : 'w-1.5 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600'
+                                    }`}
+                                    aria-label={`Go to slide ${index + 1}`}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
+
+                {/* CTA Button */}
+                <motion.div 
+                    className="mt-12 text-center"
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                >
+                    <a
+                        href="https://www.instagram.com/maninderchandok/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2.5 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 text-white px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                    >
+                        <div className="w-5 h-5">
+                            {platformIconsWhite.instagram}
+                        </div>
+                        <span>Follow on Instagram</span>
+                        <svg
+                            className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </motion.div>
             </div>
         </section>
     );

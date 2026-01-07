@@ -50,17 +50,19 @@ export default function EbookSection() {
                 {/* E-Book Visual */}
                 <motion.div 
                     className="flex-1 relative w-full max-w-md lg:max-w-lg"
-                    initial={{ opacity: 0, x: -50 }}
+                    initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     <div className="relative">
                         {/* Book image with simple shadow */}
                         <motion.div 
                             className="relative aspect-[4/3] w-full"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ duration: 0.2 }}
+                            whileHover={{ scale: 1.01 }}
+                            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                            style={{ willChange: 'transform' }}
                         >
                             <div className="relative w-full h-full rounded-xl overflow-hidden shadow-xl">
                                 <Image
@@ -75,10 +77,11 @@ export default function EbookSection() {
                         {/* Small badge */}
                         <motion.div 
                             className="absolute -top-3 -right-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 rounded-full shadow-lg shadow-amber-500/40 text-xs font-semibold uppercase tracking-wider"
-                            initial={{ scale: 0, rotate: -180 }}
-                            whileInView={{ scale: 1, rotate: 0 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: 0.15, type: "spring" }}
+                            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                            style={{ willChange: 'transform' }}
                         >
                             Free
                         </motion.div>
@@ -88,31 +91,20 @@ export default function EbookSection() {
                 {/* Content */}
                 <motion.div 
                     className="flex-1 space-y-6 max-w-xl"
-                    initial={{ opacity: 0, x: 50 }}
+                    initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ willChange: 'transform, opacity' }}
                 >
                     {/* Eyebrow */}
-                    <motion.span 
-                        className="inline-block text-sm uppercase tracking-[0.25em] text-gray-500 dark:text-gray-400"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: 0.1 }}
-                    >
+                    <span className="inline-block text-sm uppercase tracking-[0.25em] font-medium text-gray-500 dark:text-gray-400">
                         Exclusive E-Book
-                    </motion.span>
+                    </span>
 
                     {/* Headline */}
-                    <motion.div 
-                        className="space-y-3"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.15 }}
-                    >
-                        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+                    <div className="space-y-3">
+                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
                             Golden Words
                         </h2>
 
@@ -120,37 +112,25 @@ export default function EbookSection() {
                             Discover profound wisdom and life-changing insights that inspire personal growth 
                             and meaningful living through powerful words and timeless lessons.
                         </p>
-                    </motion.div>
+                    </div>
 
                     {/* Stats */}
-                    <motion.div 
-                        className="flex gap-8 py-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
-                    >
+                    <div className="flex gap-8 py-4">
                         {[
                             { value: "120+", label: "Pages" },
                             { value: "8", label: "Chapters" },
                             { value: "10K+", label: "Downloads" }
                         ].map((stat, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: 0.25 + index * 0.05 }}
-                            >
+                            <div key={index}>
                                 <div className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                                     {stat.value}
                                 </div>
                                 <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                                     {stat.label}
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
 
                     {/* CTA */}
                     <motion.div 
@@ -161,9 +141,7 @@ export default function EbookSection() {
                         transition={{ duration: 0.4, delay: 0.3 }}
                     >
                         <motion.button 
-                            className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-8 py-3 rounded-full font-medium transition-all cursor-pointer shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            className="group inline-flex items-center justify-center gap-3 text-white px-8 py-3 rounded-full font-medium transition-all cursor-pointer bg-[#CE1117]"
                         >
                             Download E-Book
                             <svg
@@ -177,9 +155,7 @@ export default function EbookSection() {
                         </motion.button>
 
                         <motion.button 
-                            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full font-medium text-amber-700 dark:text-amber-300 border-2 border-amber-400/50 dark:border-amber-600/50 hover:border-amber-500 dark:hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-all cursor-pointer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full font-medium text-amber-700 dark:text-amber-300 border-2 border-[#CE1117] dark:border-amber-600/50 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-all cursor-pointer"
                         >
                             Preview Sample
                         </motion.button>

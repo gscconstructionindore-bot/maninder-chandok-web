@@ -85,33 +85,33 @@ export default function Footer() {
             {/* Rich sophisticated dark background */}
             <div className="absolute inset-0 -z-10">
                 {/* Rich subtle gradient rays from top */}
-                <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-gradient-to-b from-indigo-800/12 via-slate-700/8 to-transparent rounded-full blur-3xl" />
-                <div className="absolute top-0 right-1/3 w-[450px] h-[350px] bg-gradient-to-b from-purple-800/10 via-gray-700/6 to-transparent rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] bg-gradient-to-t from-blue-900/8 to-transparent rounded-full blur-3xl" />
+                <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-gradient-to-b from-red-800/12 via-slate-700/8 to-transparent rounded-full blur-3xl" />
+                <div className="absolute top-0 right-1/3 w-[450px] h-[350px] bg-gradient-to-b from-red-800/10 via-gray-700/6 to-transparent rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] bg-gradient-to-t from-red-900/8 to-transparent rounded-full blur-3xl" />
                 
                 {/* Refined dot matrix pattern */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(199_210_254/0.08)_1px,transparent_0)] bg-[length:40px_40px]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(220_38_38/0.08)_1px,transparent_0)] bg-[length:40px_40px]" />
                 
                 {/* Elegant border accents with color */}
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-indigo-400/25 to-transparent" />
+                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-400/25 to-transparent" />
                 
                 {/* Professional geometric elements */}
-                <div className="absolute top-32 right-24 w-36 h-36 border-[2px] border-indigo-400/15 rounded-full shadow-lg shadow-indigo-500/5" />
-                <div className="absolute bottom-32 left-32 w-28 h-28 border-[2px] border-purple-400/12 rotate-45 rounded-lg shadow-lg shadow-purple-500/5" />
+                <div className="absolute top-32 right-24 w-36 h-36 border-[2px] border-red-400/15 rounded-full shadow-lg shadow-red-500/5" />
+                <div className="absolute bottom-32 left-32 w-28 h-28 border-[2px] border-red-400/12 rotate-45 rounded-lg shadow-lg shadow-red-500/5" />
                 
                 {/* Accent elements with subtle color */}
-                <div className="absolute top-1/2 left-1/5 w-20 h-20 border-[2px] border-blue-400/10 rounded-full" />
-                <div className="absolute bottom-1/3 right-1/4 w-24 h-24 border-[2px] border-indigo-400/12 rotate-12 rounded-lg" />
+                <div className="absolute top-1/2 left-1/5 w-20 h-20 border-[2px] border-red-400/10 rounded-full" />
+                <div className="absolute bottom-1/3 right-1/4 w-24 h-24 border-[2px] border-red-400/12 rotate-12 rounded-lg" />
                 
                 {/* Small professional dots */}
-                <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-indigo-400/20 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
-                <div className="absolute bottom-1/2 left-1/4 w-2.5 h-2.5 bg-purple-400/18 rounded-full" />
-                <div className="absolute top-2/3 left-1/3 w-2 h-2 bg-blue-400/15 rounded-full animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '1s' }} />
-                <div className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-indigo-400/15 rounded-full" />
+                <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-red-400/20 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
+                <div className="absolute bottom-1/2 left-1/4 w-2.5 h-2.5 bg-red-400/18 rounded-full" />
+                <div className="absolute top-2/3 left-1/3 w-2 h-2 bg-red-400/15 rounded-full animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '1s' }} />
+                <div className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-red-400/15 rounded-full" />
                 
                 {/* Corner accent lines */}
-                <div className="absolute top-20 left-20 w-12 h-12 border-l-2 border-t-2 border-indigo-400/15 rounded-tl-lg" />
-                <div className="absolute bottom-20 right-20 w-12 h-12 border-r-2 border-b-2 border-purple-400/15 rounded-br-lg" />
+                <div className="absolute top-20 left-20 w-12 h-12 border-l-2 border-t-2 border-red-400/15 rounded-tl-lg" />
+                <div className="absolute bottom-20 right-20 w-12 h-12 border-r-2 border-b-2 border-red-400/15 rounded-br-lg" />
             </div>
 
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 lg:px-8">
@@ -120,10 +120,11 @@ export default function Footer() {
                     {/* Brand Section */}
                     <motion.div 
                         className="space-y-4"
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4 }}
+                        viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <h3 className="text-2xl font-bold text-white">
                             Maninder Singh Chandok
@@ -141,23 +142,18 @@ export default function Footer() {
 
                     {/* Navigation Links */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
+                        viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                        transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <h4 className="text-lg font-semibold text-white mb-4">
                             Navigation
                         </h4>
                         <ul className="space-y-3">
-                            {navigationLinks.map((link, index) => (
-                                <motion.li 
-                                    key={link.href}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.3, delay: 0.15 + index * 0.05 }}
-                                >
+                            {navigationLinks.map((link) => (
+                                <li key={link.href}>
                                     <Link
                                         href={link.href}
                                         className="text-gray-300 hover:text-white transition-colors duration-200 text-sm flex items-center group"
@@ -165,30 +161,25 @@ export default function Footer() {
                                         <span className="w-0 group-hover:w-2 h-px bg-white transition-all duration-200 mr-0 group-hover:mr-2" />
                                         {link.label}
                                     </Link>
-                                </motion.li>
+                                </li>
                             ))}
                         </ul>
                     </motion.div>
 
                     {/* Quick Links */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
+                        viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <h4 className="text-lg font-semibold text-white mb-4">
                             Quick Links
                         </h4>
                         <ul className="space-y-3">
-                            {quickLinks.map((link, index) => (
-                                <motion.li 
-                                    key={link.href}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.3, delay: 0.25 + index * 0.05 }}
-                                >
+                            {quickLinks.map((link) => (
+                                <li key={link.href}>
                                     <Link
                                         href={link.href}
                                         className="text-gray-300 hover:text-white transition-colors duration-200 text-sm flex items-center group"
@@ -196,71 +187,50 @@ export default function Footer() {
                                         <span className="w-0 group-hover:w-2 h-px bg-white transition-all duration-200 mr-0 group-hover:mr-2" />
                                         {link.label}
                                     </Link>
-                                </motion.li>
+                                </li>
                             ))}
                         </ul>
                     </motion.div>
 
                     {/* Social Media Links */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.3 }}
+                        viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+                        transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ willChange: 'transform, opacity' }}
                     >
                         <h4 className="text-lg font-semibold text-white mb-4">
                             Connect With Us
                         </h4>
                         <ul className="space-y-3">
-                            {socialLinks.map((social, index) => (
-                                <motion.li 
-                                    key={social.platform}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.3, delay: 0.35 + index * 0.05 }}
-                                >
+                            {socialLinks.map((social) => (
+                                <li key={social.platform}>
                                     <a
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="group flex items-center gap-3 text-gray-300 hover:text-white transition-all duration-200"
                                     >
-                                        <motion.div 
-                                            className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/40 group-hover:shadow-md transition-all duration-200"
-                                            whileHover={{ scale: 1.1, rotate: 5 }}
-                                            whileTap={{ scale: 0.95 }}
-                                        >
+                                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-red-600/30 group-hover:border-red-500/60 group-hover:shadow-lg group-hover:shadow-red-500/30 transition-all duration-200">
                                             {platformIcons[social.platform as keyof typeof platformIcons]}
-                                        </motion.div>
+                                        </div>
                                         <div className="flex flex-col">
                                             <span className="text-sm font-medium">{social.label}</span>
                                             <span className="text-xs text-gray-400">{social.username}</span>
                                         </div>
                                     </a>
-                                </motion.li>
+                                </li>
                             ))}
                         </ul>
                     </motion.div>
                 </div>
 
                 {/* Divider */}
-                <motion.div 
-                    className="border-t border-white/10 my-8"
-                    initial={{ opacity: 0, scaleX: 0 }}
-                    whileInView={{ opacity: 1, scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                />
+                <div className="my-8 h-px bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
 
                 {/* Bottom Footer */}
-                <motion.div 
-                    className="flex flex-col md:flex-row justify-between items-center gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.45 }}
-                >
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-gray-400 text-center md:text-left">
                         © {currentYear} Maninder Singh Chandok. All rights reserved.
                     </p>
@@ -279,18 +249,12 @@ export default function Footer() {
                             Terms of Service
                         </Link>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Scroll to Top Button */}
-                <motion.button
+                <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="fixed bottom-8 right-8 w-12 h-12 bg-white text-black rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-all duration-300 z-50"
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.5 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
+                    className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-red-600 to-red-600 text-white rounded-full shadow-lg shadow-red-500/50 flex items-center justify-center hover:shadow-xl hover:shadow-red-500/70 transition-all duration-300 z-50 hover:scale-110"
                 >
                     <svg 
                         className="w-6 h-6" 
@@ -300,7 +264,7 @@ export default function Footer() {
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                     </svg>
-                </motion.button>
+                </button>
             </div>
         </footer>
     );

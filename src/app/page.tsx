@@ -1,10 +1,12 @@
 import Navbar from "@/components/navbar";
 import Hero from "@/components/hero";
-import OurMission from "@/components/our-mission";
 import SocialMedia from "@/components/social-media";
 import EbookSection from "@/components/ebook-section";
 import ScrollIndicator from "@/components/scroll-indicator";
 import Footer from "@/components/footer";
+import YesICanSection from "@/components/yes_i_can";
+import WashHands from "@/components/washHands";
+import Newsletter from "@/components/newsletter";
 
 export default function Home() {
 	return (
@@ -13,8 +15,10 @@ export default function Home() {
 			<Hero />
 			<ScrollIndicator />
 			<SocialMedia />
+			<YesICanSection />
 			<EbookSection />
-			<OurMission />
+			<WashHands />
+			<Newsletter />
 			<Footer />
 		</main>
 	);
