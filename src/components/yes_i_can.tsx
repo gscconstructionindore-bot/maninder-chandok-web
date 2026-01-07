@@ -12,7 +12,7 @@ export default function YesICanSection() {
           alt="Motivational Speaker"
           fill
           priority
-          quality={100}
+          quality={90}
           className="object-cover object-center"
           sizes="100vw"
         />
