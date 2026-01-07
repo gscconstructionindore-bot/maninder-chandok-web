@@ -139,7 +139,6 @@ export default function Navbar() {
                             </AnimatePresence>
                         </motion.div>
                     )} */}
-
                     {/* Divider */}
                     {/* <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2" /> */}
 
