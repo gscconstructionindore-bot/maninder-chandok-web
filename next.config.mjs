@@ -13,6 +13,13 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
+  },
+  // Reduce bundle size for Cloudflare Workers
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
 };
 
 // Enable calling `getCloudflareContext()` in `next dev`
