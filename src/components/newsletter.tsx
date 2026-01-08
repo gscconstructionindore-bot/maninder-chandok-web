@@ -3,20 +3,32 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function Newsletter() {
-  const [email, setEmail] = useState("");
+export default function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
     
-    // Simulate API call - replace with actual newsletter service
+    // Simulate API call - replace with actual contact form service
     setTimeout(() => {
       setStatus("success");
-      setEmail("");
+      setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setStatus("idle"), 3000);
     }, 1000);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
 
   return (
@@ -70,7 +82,7 @@ export default function Newsletter() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            Stay Connected
+            Get in Touch
           </motion.span>
 
           {/* Title */}
@@ -81,7 +93,7 @@ export default function Newsletter() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            Join Our Newsletter
+            Contact Us
           </motion.h2>
 
           {/* Description */}
@@ -92,36 +104,72 @@ export default function Newsletter() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            Get exclusive insights, motivational content, and updates on upcoming events delivered straight to your inbox.
+            Have a question or want to collaborate? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
           </motion.p>
 
-          {/* Newsletter Form */}
+          {/* Contact Form */}
           <motion.form 
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto"
+            className="max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  required
+                  disabled={status === "loading" || status === "success"}
+                  className="px-6 py-4 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Your Email"
+                  required
+                  disabled={status === "loading" || status === "success"}
+                  className="px-6 py-4 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
+                />
+              </div>
+              
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="Subject"
                 required
                 disabled={status === "loading" || status === "success"}
-                className="flex-1 px-6 py-4 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
+                className="w-full px-6 py-4 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 disabled:opacity-50"
               />
+              
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your Message"
+                required
+                rows={6}
+                disabled={status === "loading" || status === "success"}
+                className="w-full px-6 py-4 rounded-lg bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 disabled:opacity-50 resize-none"
+              />
+              
               <motion.button
                 type="submit"
                 disabled={status === "loading" || status === "success"}
-                className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-600 hover:from-red-700 hover:to-red-700 text-white font-semibold rounded-lg shadow-lg shadow-red-500/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-8 py-4 bg-gradient-to-r from-red-600 to-red-600 hover:from-red-700 hover:to-red-700 text-white font-semibold rounded-lg shadow-lg shadow-red-500/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 whileHover={{ scale: status === "idle" || status === "error" ? 1.02 : 1 }}
                 whileTap={{ scale: status === "idle" || status === "error" ? 0.98 : 1 }}
               >
-                {status === "loading" ? "Subscribing..." : status === "success" ? "Subscribed!" : "Subscribe"}
+                {status === "loading" ? "Sending..." : status === "success" ? "Message Sent!" : "Send Message"}
               </motion.button>
             </div>
             
@@ -132,7 +180,7 @@ export default function Newsletter() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                ✓ Thank you for subscribing!
+                ✓ Thank you for your message! We'll get back to you soon.
               </motion.p>
             )}
             
@@ -156,7 +204,7 @@ export default function Newsletter() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            We respect your privacy. Unsubscribe at any time.
+            We respect your privacy and will never share your information.
           </motion.p>
         </motion.div>
       </div>
