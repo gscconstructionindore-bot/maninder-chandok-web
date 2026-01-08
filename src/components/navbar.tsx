@@ -56,7 +56,7 @@ export default function Navbar() {
                             { href: "/", label: "Home" },
                             { href: "#programs", label: "Programs" },
                             { href: "#about", label: "About" },
-                            { href: "#blog", label: "Blog" },
+                            { href: "/blog", label: "Blog" },
                             { href: "#contact", label: "Contact" }
                         ].map((link) => (
                             <Link
@@ -196,7 +196,7 @@ export default function Navbar() {
                                 { href: "/", label: "Home" },
                                 { href: "#programs", label: "Programs" },
                                 { href: "#about", label: "About" },
-                                { href: "#blog", label: "Blog" },
+                                { href: "/blog", label: "Blog" },
                                 { href: "#contact", label: "Contact" }
                             ].map((link, index) => (
                                 <motion.div

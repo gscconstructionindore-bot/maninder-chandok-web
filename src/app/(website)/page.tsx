@@ -19,7 +19,6 @@ export default function Home() {
 			<EbookSection />
 			<WashHands />
 			<Newsletter />
-			<Footer />
 		</main>
 	);
 }
