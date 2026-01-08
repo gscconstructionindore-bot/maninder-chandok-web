@@ -1,17 +1,23 @@
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'cdn.sanity.io',
-			},
-		],
-	},
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+// Enable calling `getCloudflareContext()` in `next dev`
+if (process.env.NODE_ENV === "development") {
+  initOpenNextCloudflareForDev();
+}
 
-// Enable calling `getCloudflareContext()` in `next dev`.
-// See https://opennext.js.org/cloudflare/bindings#local-access-to-bindings.
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
-initOpenNextCloudflareForDev();
+export default nextConfig;

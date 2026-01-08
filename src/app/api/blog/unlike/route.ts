@@ -13,7 +13,7 @@ const writeClient = createClient({
 
 export async function POST(request: Request) {
   try {
-    const { postId } = await request.json();
+    const { postId } = await request.json() as { postId: string };
 
     if (!postId) {
       return NextResponse.json({ error: "Post ID is required" }, { status: 400 });
