@@ -11,6 +11,9 @@ import path from 'path';
 
 import { client } from "@/sanity/lib/client";
 
+import ExpertiseSection from "@/components/expertise-section";
+import HomeBlogSection from "@/components/home-blog-section";
+
 async function getRecentCertificates() {
 	const lionsDir = path.join(process.cwd(), 'public/LIONS');
 
@@ -32,20 +35,38 @@ async function getFeaturedProduct() {
 	);
 }
 
+async function getLatestPosts() {
+	return await client.fetch(
+		`*[_type == "blog"] | order(publishedAt desc)[0...3] {
+            _id,
+            title,
+            slug,
+            excerpt,
+            coverImage,
+            publishedAt
+        }`,
+		{},
+		{ cache: 'no-store' }
+	);
+}
+
 export default async function Home() {
 	const recentCertificates = await getRecentCertificates();
 	const featuredProduct = await getFeaturedProduct();
+	const latestPosts = await getLatestPosts();
 
 	return (
 		<main className="min-h-screen bg-white dark:bg-gray-950">
 			<Hero />
 			<QuotesSection />
 			<HomeCertificates images={recentCertificates} />
-			<FeaturedVideo /> {/* Added FeaturedVideo component here */}
+			<ExpertiseSection />
+			<FeaturedVideo />
 			<ScrollIndicator />
 			<SocialMedia />
 			{/* <YesICanSection /> */}
 			<EbookSection product={featuredProduct} />
+			<HomeBlogSection posts={latestPosts} />
 			{/* <WashHands /> */}
 			<Newsletter />
 		</main>
