@@ -13,7 +13,7 @@ export default function HomeCertificates({ images }: HomeCertificatesProps) {
     if (!images || images.length === 0) return null;
 
     return (
-        <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900/50">
+        <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900/50 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">

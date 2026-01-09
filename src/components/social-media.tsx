@@ -99,10 +99,17 @@ const platformIconsWhite = {
 
 export default function SocialMedia() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const itemsPerView = 3;
-    const maxSlides = Math.max(0, reels.length - itemsPerView);
+    const [itemsPerView, setItemsPerView] = useState(3);
 
     useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 640) setItemsPerView(1);
+            else if (window.innerWidth < 1024) setItemsPerView(2);
+            else setItemsPerView(3);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
         // Load Instagram embed script
         const script = document.createElement('script');
         script.src = '//www.instagram.com/embed.js';
@@ -110,12 +117,14 @@ export default function SocialMedia() {
         document.body.appendChild(script);
 
         return () => {
-            // Cleanup script on unmount
+            window.removeEventListener('resize', handleResize);
             if (script.parentNode) {
                 script.parentNode.removeChild(script);
             }
         };
     }, []);
+
+    const maxSlides = Math.max(0, reels.length - itemsPerView);
 
     const nextSlide = () => {
         setCurrentSlide((prev) => Math.min(prev + 1, maxSlides));
@@ -125,6 +134,13 @@ export default function SocialMedia() {
         setCurrentSlide((prev) => Math.max(prev - 1, 0));
     };
 
+    // Ensure currentSlide is within bounds after resize
+    useEffect(() => {
+        if (currentSlide > maxSlides) {
+            setCurrentSlide(maxSlides);
+        }
+    }, [itemsPerView, maxSlides, currentSlide]);
+
     return (
         <section className="relative overflow-hidden w-full bg-white dark:bg-gray-950">
             {/* Subtle premium background */}
@@ -132,14 +148,14 @@ export default function SocialMedia() {
                 {/* Minimal gradient orbs */}
                 <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-fuchsia-500/8 to-transparent dark:from-fuchsia-500/5 rounded-full blur-3xl" />
                 <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-violet-500/8 to-transparent dark:from-violet-500/5 rounded-full blur-3xl" />
-                
+
                 {/* Subtle top border */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-800 to-transparent" />
             </div>
-            
+
             <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 lg:px-8">
                 {/* Section Header */}
-                <motion.div 
+                <motion.div
                     className="text-center mb-12"
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -155,24 +171,25 @@ export default function SocialMedia() {
                 </motion.div>
 
                 {/* Instagram Slider */}
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-6xl mx-auto px-4 md:px-0">
                     <div className="relative">
                         {/* Slider Container */}
-                        <div className="overflow-hidden">
-                            <motion.div 
-                                className="flex gap-6"
-                                animate={{ x: `${-currentSlide * (100 / itemsPerView + 2)}%` }}
+                        <div className="overflow-hidden p-2">
+                            <motion.div
+                                className="flex gap-4 md:gap-6"
+                                animate={{ x: `-${currentSlide * (100 / itemsPerView)}%` }}
                                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                             >
                                 {reels.map((reel, index) => (
                                     <motion.div
                                         key={reel.id}
-                                        className="group relative flex-shrink-0 w-[calc(33.333%-16px)] aspect-[9/16] rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-500"
+                                        className="group relative flex-shrink-0 aspect-[9/16] rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-500"
+                                        style={{ width: `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * (window.innerWidth < 768 ? 16 : 24) / itemsPerView}px)` }}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-50px", amount: 0.3 }}
                                         transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                                    >   
+                                    >
                                         {/* Video Embed */}
                                         <iframe
                                             src={reel.embedUrl}
@@ -183,7 +200,7 @@ export default function SocialMedia() {
                                             allowFullScreen
                                             title={reel.title}
                                         />
-                                        
+
                                         {/* Hover Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                             <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -208,7 +225,7 @@ export default function SocialMedia() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
-                                
+
                                 <button
                                     onClick={nextSlide}
                                     disabled={currentSlide === maxSlides}
@@ -230,11 +247,10 @@ export default function SocialMedia() {
                                 <button
                                     key={index}
                                     onClick={() => setCurrentSlide(index)}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                                        currentSlide === index 
-                                            ? 'w-8 bg-gray-900 dark:bg-white' 
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${currentSlide === index
+                                            ? 'w-8 bg-gray-900 dark:bg-white'
                                             : 'w-1.5 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600'
-                                    }`}
+                                        }`}
                                     aria-label={`Go to slide ${index + 1}`}
                                 />
                             ))}
@@ -243,7 +259,7 @@ export default function SocialMedia() {
                 </div>
 
                 {/* CTA Button */}
-                <motion.div 
+                <motion.div
                     className="mt-12 text-center"
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}

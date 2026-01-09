@@ -70,7 +70,7 @@ export default function RootLayout({
 			<head>
 				<link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
 			</head>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}>
 				{children}
 				<Script
 					src="//www.instagram.com/embed.js"

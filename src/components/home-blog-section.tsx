@@ -24,7 +24,7 @@ export default function HomeBlogSection({ posts }: HomeBlogSectionProps) {
     if (!posts || posts.length === 0) return null;
 
     return (
-        <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
+        <section className="py-16 md:py-24 bg-white dark:bg-gray-950 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                     <div>

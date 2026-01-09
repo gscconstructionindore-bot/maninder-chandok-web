@@ -39,6 +39,7 @@ const platformIcons = {
 const navigationLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/products", label: "Products" },
     { href: "/blog", label: "Blog" },
 ];
@@ -79,7 +80,7 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative bg-gradient-to-b from-slate-900 via-gray-900 to-black dark:from-black dark:via-gray-950 dark:to-black text-white">
+        <footer className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-gray-900 to-black dark:from-black dark:via-gray-950 dark:to-black text-white">
             {/* Rich sophisticated dark background */}
             <div className="absolute inset-0 -z-10">
                 {/* Rich subtle gradient rays from top */}

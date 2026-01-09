@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function QuotesSection() {
     return (
-        <section className="py-16 md:py-24 bg-white dark:bg-gray-950">
+        <section className="py-16 md:py-24 bg-white dark:bg-gray-950 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 md:gap-8">
                     {/* Card 1 */}

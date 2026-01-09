@@ -55,6 +55,7 @@ export default function Navbar() {
                         {[
                             { href: "/", label: "Home" },
                             { href: "/products", label: "Ebooks" },
+                            { href: "/gallery", label: "Gallery" },
                             { href: "/about", label: "About" },
                             { href: "/blog", label: "Blog" },
                         ].map((link) => (
@@ -194,6 +195,7 @@ export default function Navbar() {
                             {[
                                 { href: "/", label: "Home" },
                                 { href: "#programs", label: "Programs" },
+                                { href: "/gallery", label: "Gallery" },
                                 { href: "/about", label: "About" },
                                 { href: "/blog", label: "Blog" },
                             ].map((link, index) => (
