@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 async function getBlogPosts() {
   const posts = await client.fetch(
     `*[_type == "blog"] | order(publishedAt desc) {

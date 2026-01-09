@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     },
 };
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 async function getProducts() {
     const products = await client.fetch(
         `*[_type == "product"] | order(title asc) {

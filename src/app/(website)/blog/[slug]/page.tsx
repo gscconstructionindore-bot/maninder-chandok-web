@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
 import { urlFor } from "@/sanity/lib/image";
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 async function getBlogPost(slug: string) {
   const post = await client.fetch(
     `*[_type == "blog" && slug.current == $slug][0] {
