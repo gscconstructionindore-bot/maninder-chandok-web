@@ -32,7 +32,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="relative w-full py-16 md:py-24 bg-white dark:bg-gray-950 overflow-hidden">
+    <section id="contact" className="relative w-full py-16 md:py-24 bg-white dark:bg-gray-950 overflow-hidden">
       {/* Background elements matching the theme */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient orbs */}

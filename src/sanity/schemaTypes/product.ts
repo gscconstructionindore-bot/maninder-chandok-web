@@ -64,5 +64,12 @@ export const product = defineType({
             description: 'The secure file that users will download after purchase.',
             validation: (Rule) => Rule.required(),
         }),
+        defineField({
+            name: 'isFeatured',
+            title: 'Featured Product',
+            type: 'boolean',
+            description: 'Toggle to show this product in the featured section on the home page. Note: Only one product should be featured at a time.',
+            initialValue: false,
+        }),
     ],
 })

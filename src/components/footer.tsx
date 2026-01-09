@@ -38,43 +38,41 @@ const platformIcons = {
 
 const navigationLinks = [
     { href: "/", label: "Home" },
-    { href: "#programs", label: "Programs" },
-    { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
+    { href: "/about", label: "About" },
+    { href: "/products", label: "Products" },
+    { href: "/blog", label: "Blog" },
 ];
 
 const socialLinks = [
-    { 
-        platform: "instagram", 
-        label: "Instagram", 
+    {
+        platform: "instagram",
+        label: "Instagram",
         href: "https://www.instagram.com/maninderchandok/",
         username: "@maninderchandok"
     },
-    { 
-        platform: "youtube", 
-        label: "YouTube", 
+    {
+        platform: "youtube",
+        label: "YouTube",
         href: "https://www.youtube.com/channel/UCfW56czzEdxsc3HnvYTIExw",
         username: "Maninder Chandok"
     },
-    { 
-        platform: "facebook", 
-        label: "Facebook", 
+    {
+        platform: "facebook",
+        label: "Facebook",
         href: "https://www.facebook.com/ManinderSChandok",
         username: "ManinderSChandok"
     },
-    { 
-        platform: "twitter", 
-        label: "Twitter", 
+    {
+        platform: "twitter",
+        label: "Twitter",
         href: "https://x.com/ManinderChandok",
         username: "@ManinderChandok"
     },
 ];
 
 const quickLinks = [
-    { href: "#services", label: "Services" },
-    { href: "#testimonials", label: "Testimonials" },
-    { href: "#blog", label: "Blog" },
-    { href: "#careers", label: "Careers" },
+    { href: "/privacy", label: "Privacy Policy" },
+    { href: "/terms", label: "Terms of Service" },
 ];
 
 export default function Footer() {
@@ -88,37 +86,37 @@ export default function Footer() {
                 <div className="absolute top-0 left-1/4 w-[500px] h-[400px] bg-gradient-to-b from-red-800/12 via-slate-700/8 to-transparent rounded-full blur-3xl" />
                 <div className="absolute top-0 right-1/3 w-[450px] h-[350px] bg-gradient-to-b from-red-800/10 via-gray-700/6 to-transparent rounded-full blur-3xl" />
                 <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] bg-gradient-to-t from-red-900/8 to-transparent rounded-full blur-3xl" />
-                
+
                 {/* Refined dot matrix pattern */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(220_38_38/0.08)_1px,transparent_0)] bg-[length:40px_40px]" />
-                
+
                 {/* Elegant border accents with color */}
                 <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-400/25 to-transparent" />
-                
+
                 {/* Professional geometric elements */}
                 <div className="absolute top-32 right-24 w-36 h-36 border-[2px] border-red-400/15 rounded-full shadow-lg shadow-red-500/5" />
                 <div className="absolute bottom-32 left-32 w-28 h-28 border-[2px] border-red-400/12 rotate-45 rounded-lg shadow-lg shadow-red-500/5" />
-                
+
                 {/* Accent elements with subtle color */}
                 <div className="absolute top-1/2 left-1/5 w-20 h-20 border-[2px] border-red-400/10 rounded-full" />
                 <div className="absolute bottom-1/3 right-1/4 w-24 h-24 border-[2px] border-red-400/12 rotate-12 rounded-lg" />
-                
+
                 {/* Small professional dots */}
                 <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-red-400/20 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
                 <div className="absolute bottom-1/2 left-1/4 w-2.5 h-2.5 bg-red-400/18 rounded-full" />
                 <div className="absolute top-2/3 left-1/3 w-2 h-2 bg-red-400/15 rounded-full animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '1s' }} />
                 <div className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-red-400/15 rounded-full" />
-                
+
                 {/* Corner accent lines */}
                 <div className="absolute top-20 left-20 w-12 h-12 border-l-2 border-t-2 border-red-400/15 rounded-tl-lg" />
                 <div className="absolute bottom-20 right-20 w-12 h-12 border-r-2 border-b-2 border-red-400/15 rounded-br-lg" />
             </div>
 
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 lg:px-8">
+            <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 lg:px-8">
                 {/* Main Footer Content */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                     {/* Brand Section */}
-                    <motion.div 
+                    <motion.div
                         className="space-y-4"
                         initial={{ opacity: 0, y: 12 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -234,16 +232,16 @@ export default function Footer() {
                     <p className="text-sm text-gray-400 text-center md:text-left">
                         © {currentYear} Maninder Singh Chandok. All rights reserved.
                     </p>
-                    
+
                     <div className="flex items-center gap-6">
-                        <Link 
-                            href="/privacy" 
+                        <Link
+                            href="/privacy"
                             className="text-sm text-gray-300 hover:text-white transition-colors duration-200"
                         >
                             Privacy Policy
                         </Link>
-                        <Link 
-                            href="/terms" 
+                        <Link
+                            href="/terms"
                             className="text-sm text-gray-300 hover:text-white transition-colors duration-200"
                         >
                             Terms of Service
@@ -256,10 +254,10 @@ export default function Footer() {
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-red-600 to-red-600 text-white rounded-full shadow-lg shadow-red-500/50 flex items-center justify-center hover:shadow-xl hover:shadow-red-500/70 transition-all duration-300 z-50 hover:scale-110"
                 >
-                    <svg 
-                        className="w-6 h-6" 
-                        fill="none" 
-                        viewBox="0 0 24 24" 
+                    <svg
+                        className="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
                         stroke="currentColor"
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />

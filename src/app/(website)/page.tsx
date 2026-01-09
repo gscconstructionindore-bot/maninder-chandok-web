@@ -9,6 +9,8 @@ import FeaturedVideo from "@/components/featured-video";
 import fs from 'fs';
 import path from 'path';
 
+import { client } from "@/sanity/lib/client";
+
 async function getRecentCertificates() {
 	const lionsDir = path.join(process.cwd(), 'public/LIONS');
 
@@ -22,8 +24,17 @@ async function getRecentCertificates() {
 	}
 }
 
+async function getFeaturedProduct() {
+	return await client.fetch(
+		`*[_type == "product" && isFeatured == true][0]`,
+		{},
+		{ cache: 'no-store' }
+	);
+}
+
 export default async function Home() {
 	const recentCertificates = await getRecentCertificates();
+	const featuredProduct = await getFeaturedProduct();
 
 	return (
 		<main className="min-h-screen bg-white dark:bg-gray-950">
@@ -34,7 +45,7 @@ export default async function Home() {
 			<ScrollIndicator />
 			<SocialMedia />
 			{/* <YesICanSection /> */}
-			<EbookSection />
+			<EbookSection product={featuredProduct} />
 			{/* <WashHands /> */}
 			<Newsletter />
 		</main>
