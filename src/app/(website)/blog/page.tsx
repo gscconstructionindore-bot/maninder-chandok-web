@@ -31,7 +31,7 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-950 pt-24">
+    <main className="min-h-screen bg-white dark:bg-gray-950 pt-14">
       <BlogList posts={posts} />
     </main>
   );

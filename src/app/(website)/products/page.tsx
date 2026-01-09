@@ -24,7 +24,7 @@ async function getProducts() {
       coverImage,
       description
     }`
-    );
+        , {}, { cache: 'no-store' });
     return products;
 }
 
@@ -32,8 +32,8 @@ export default async function ProductsPage() {
     const products = await getProducts();
 
     return (
-        <main className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-18">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                         Digital Store

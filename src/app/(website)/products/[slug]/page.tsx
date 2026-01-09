@@ -19,7 +19,8 @@ async function getProduct(slug: string) {
       features,
       coverImage
     }`,
-        { slug }
+        { slug },
+        { cache: 'no-store' }
     );
     return product;
 }
