@@ -22,7 +22,7 @@ export default function Navbar() {
     const applyTheme = (newTheme: Theme) => {
         const root = document.documentElement;
         root.classList.remove("dark");
-        
+
         if (newTheme === "system") {
             const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
             if (systemTheme) {
@@ -31,7 +31,7 @@ export default function Navbar() {
         } else if (newTheme === "dark") {
             root.classList.add("dark");
         }
-        
+
         localStorage.setItem("theme", newTheme);
     };
 
@@ -42,7 +42,7 @@ export default function Navbar() {
     };
     return (
         <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
-            <motion.nav 
+            <motion.nav
                 className="bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 rounded-full shadow-lg shadow-black/5 dark:shadow-black/20"
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -54,7 +54,7 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center gap-1">
                         {[
                             { href: "/", label: "Home" },
-                            { href: "#programs", label: "Programs" },
+                            { href: "/products", label: "Ebooks" },
                             { href: "#about", label: "About" },
                             { href: "/blog", label: "Blog" },
                             { href: "#contact", label: "Contact" }
@@ -73,7 +73,7 @@ export default function Navbar() {
                     {/* <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2" /> */}
 
                     {/* Theme Switcher */}
-                     {/* {mounted && (
+                    {/* {mounted && (
                         <motion.div 
                             className="relative flex items-center"
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -143,13 +143,13 @@ export default function Navbar() {
                     {/* <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2" /> */}
 
                     {/* CTA Button */}
-                    <motion.div 
+                    <motion.div
                         className="flex items-center"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3, delay: 0.25 }}
                     >
-                        <motion.button 
+                        <motion.button
                             className="bg-black dark:bg-white text-white dark:text-black px-5 py-2 rounded-full font-medium text-sm transition-all"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
@@ -159,7 +159,7 @@ export default function Navbar() {
                     </motion.div>
 
                     {/* Mobile Menu Button */}
-                    <motion.button 
+                    <motion.button
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         className="md:hidden p-2 text-gray-600 dark:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
                         whileHover={{ scale: 1.1 }}

@@ -15,15 +15,48 @@ const geistMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Maninder Singh Chandok",
-	description: "Maninder Singh Chandok's personal website",
+	metadataBase: new URL("https://manindersinghchandok.com"),
+	title: {
+		default: "Maninder Singh Chandok",
+		template: "%s | Maninder Singh Chandok",
+	},
+	description: "Maninder Singh Chandok's personal website - Portfolio, Blog, and Thoughts.",
+	keywords: ["Maninder Singh Chandok", "Developer", "Portfolio", "Blog", "Tech", "Software Engineer"],
+	authors: [{ name: "Maninder Singh Chandok" }],
+	creator: "Maninder Singh Chandok",
 	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: "https://manindersinghchandok.com",
 		title: "Maninder Singh Chandok",
-		description: "Maninder Singh Chandok's personal website",
-		images: ["/favicon.svg"],
+		description: "Maninder Singh Chandok's personal website - Portfolio, Blog, and Thoughts.",
+		siteName: "Maninder Singh Chandok",
+		images: [
+			{
+				url: "/favicon.svg",
+				width: 1200,
+				height: 630,
+				alt: "Maninder Singh Chandok",
+			},
+		],
 	},
 	twitter: {
 		card: "summary_large_image",
+		title: "Maninder Singh Chandok",
+		description: "Maninder Singh Chandok's personal website - Portfolio, Blog, and Thoughts.",
+		images: ["/favicon.svg"],
+		creator: "@manindersingh", // Placeholder, ideally should be updated if user has a handle
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
 	},
 };
 
@@ -39,8 +72,8 @@ export default function RootLayout({
 			</head>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				{children}
-				<Script 
-					src="//www.instagram.com/embed.js" 
+				<Script
+					src="//www.instagram.com/embed.js"
 					strategy="lazyOnload"
 				/>
 			</body>

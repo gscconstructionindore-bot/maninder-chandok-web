@@ -1,5 +1,15 @@
 import { client } from "@/sanity/lib/client";
 import BlogList from "@/components/blog-list";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Read my latest thoughts and tutorials on software development and technology.",
+  openGraph: {
+    title: "Blog | Maninder Singh Chandok",
+    description: "Read my latest thoughts and tutorials on software development and technology.",
+  },
+};
 
 async function getBlogPosts() {
   const posts = await client.fetch(
