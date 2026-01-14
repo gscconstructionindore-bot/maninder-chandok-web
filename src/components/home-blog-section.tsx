@@ -7,6 +7,13 @@ import { motion } from "framer-motion";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 
+// Helper function for consistent date formatting
+const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+};
+
 interface BlogPost {
     _id: string;
     title: string;
@@ -85,11 +92,7 @@ export default function HomeBlogSection({ posts }: HomeBlogSectionProps) {
                                 <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 mb-4">
                                     <div className="flex items-center gap-1.5">
                                         <Calendar className="w-3.5 h-3.5" />
-                                        {new Date(post.publishedAt).toLocaleDateString(undefined, {
-                                            year: 'numeric',
-                                            month: 'short',
-                                            day: 'numeric'
-                                        })}
+                                        {formatDate(post.publishedAt)}
                                     </div>
                                     <div className="flex items-center gap-1.5">
                                         <User className="w-3.5 h-3.5" />

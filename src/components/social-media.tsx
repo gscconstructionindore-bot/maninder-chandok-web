@@ -100,11 +100,14 @@ const platformIconsWhite = {
 export default function SocialMedia() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [itemsPerView, setItemsPerView] = useState(3);
+    const [windowWidth, setWindowWidth] = useState(768);
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 640) setItemsPerView(1);
-            else if (window.innerWidth < 1024) setItemsPerView(2);
+            const width = window.innerWidth;
+            setWindowWidth(width);
+            if (width < 640) setItemsPerView(1);
+            else if (width < 1024) setItemsPerView(2);
             else setItemsPerView(3);
         };
         handleResize();
@@ -184,7 +187,7 @@ export default function SocialMedia() {
                                     <motion.div
                                         key={reel.id}
                                         className="group relative flex-shrink-0 aspect-[9/16] rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 shadow-md hover:shadow-xl transition-all duration-500"
-                                        style={{ width: `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * (window.innerWidth < 768 ? 16 : 24) / itemsPerView}px)` }}
+                                        style={{ width: `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * (windowWidth < 768 ? 16 : 24) / itemsPerView}px)` }}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-50px", amount: 0.3 }}

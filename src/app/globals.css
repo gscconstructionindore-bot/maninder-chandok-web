@@ -12,12 +12,6 @@
 	--foreground: #171717;
 }
 
-:root.dark,
-.dark {
-	--background: #0a0a0a;
-	--foreground: #ededed;
-	color-scheme: dark;
-}
 
 body {
 	background: var(--background);
