@@ -1,140 +1,141 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Script from 'next/script';
+import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
+import { useAuth } from "@/contexts/auth-context";
+import AuthModal from "@/components/auth-modal";
 
 interface BuyButtonProps {
     productId: string;
+    productName?: string; // Add optional prop for easier access if needed, or fetch from ID
     price: number;
 }
 
-declare global {
-    interface Window {
-        Razorpay: any;
-    }
-}
+export default function BuyButton({ productId, price, productName = "Product" }: BuyButtonProps) {
+    const { user } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
-export default function BuyButton({ productId, price }: BuyButtonProps) {
-    const [loading, setLoading] = useState(false);
-    const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
+    const loadRazorpay = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
 
-    const handlePayment = async () => {
-        setLoading(true);
+    const handleBuy = async () => {
+        if (!user) {
+            setShowAuthModal(true);
+            return;
+        }
+
+        setIsLoading(true);
 
         try {
-            // 1. Create Order
-            const orderRes = await fetch('/api/payment/order', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId }),
+            const res = await loadRazorpay();
+
+            if (!res) {
+                alert("Razorpay SDK failed to load. Are you online?");
+                return;
+            }
+
+            // Create Order
+            const orderRes = await fetch("/api/orders/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: price, currency: "INR" }),
             });
 
-            const orderData = await orderRes.json() as {
-                keyId: string;
-                amount: number;
-                currency: string;
-                productName: string;
-                productDescription: string;
-                orderId: string;
-                error?: string;
-            };
+            if (!orderRes.ok) {
+                throw new Error("Failed to create order");
+            }
 
-            if (!orderRes.ok) throw new Error(orderData.error);
+            const orderData = (await orderRes.json()) as any;
 
-            // 2. Open Razorpay
             const options = {
-                key: orderData.keyId,
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                 amount: orderData.amount,
                 currency: orderData.currency,
-                name: orderData.productName,
-                description: orderData.productDescription,
-                order_id: orderData.orderId,
+                name: "Maninder Singh Chandok",
+                description: `Purchase of ${productName}`,
+                order_id: orderData.id,
                 handler: async function (response: any) {
-                    // 3. Verify Payment
                     try {
-                        const verifyRes = await fetch('/api/payment/verify', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                        const verifyRes = await fetch("/api/orders/verify", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({
                                 razorpay_order_id: response.razorpay_order_id,
                                 razorpay_payment_id: response.razorpay_payment_id,
                                 razorpay_signature: response.razorpay_signature,
-                                productId: productId
+                                productId,
+                                productName,
+                                amount: price
                             }),
                         });
 
-                        const verifyData = await verifyRes.json() as { success: boolean; downloadUrl: string };
+                        const verifyData = (await verifyRes.json()) as any;
 
-                        if (verifyData.success) {
-                            setDownloadUrl(verifyData.downloadUrl);
-                            alert('Payment Successful! Click the button below to download.');
+                        if (verifyRes.ok) {
+                            alert("Payment Successful! Order created.");
+                            // Likely redirect to orders page or download page
+                            window.location.href = "/profile";
                         } else {
-                            alert('Payment verification failed.');
+                            alert(verifyData.error || "Payment verification failed");
                         }
-                    } catch (err) {
-                        console.error(err);
-                        alert('Error verifying payment.');
+                    } catch (error) {
+                        console.error("Verification error", error);
+                        alert("Payment verification failed");
                     }
                 },
                 prefill: {
-                    name: '', // We could collect this if we had user auth
-                    email: '',
-                    contact: ''
+                    name: user.name,
+                    email: user.email,
+                    contact: (user as any).phone || "",
                 },
                 theme: {
-                    color: '#CE1117' // Matching the site theme
-                }
+                    color: "#CE1117",
+                },
             };
 
-            const rzp1 = new window.Razorpay(options);
-            rzp1.on('payment.failed', function (response: any) {
-                alert(response.error.description);
-            });
-            rzp1.open();
+            const paymentObject = new (window as any).Razorpay(options);
+            paymentObject.open();
 
         } catch (error) {
-            console.error('Payment Error:', error);
-            alert('Failed to initiate payment.');
+            console.error("Checkout failed:", error);
+            alert("Something went wrong with checkout.");
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
-    if (downloadUrl) {
-        return (
-            <a
-                href={downloadUrl}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-all shadow-lg hover:shadow-xl w-full sm:w-auto"
-                rel="noopener noreferrer"
-            >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Download Now
-            </a>
-        );
-    }
-
     return (
         <>
-            <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
             <button
-                onClick={handlePayment}
-                disabled={loading}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#CE1117] text-white rounded-full font-medium hover:bg-red-700 transition-all shadow-lg hover:shadow-xl w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleBuy}
+                disabled={isLoading}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#CE1117] hover:bg-[#a50d12] text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed text-lg"
             >
-                {loading ? (
-                    <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                {isLoading ? (
+                    <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Processing...
+                    </>
                 ) : (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
+                    <>
+                        <ShoppingCart className="w-5 h-5" />
+                        Buy Now for ₹{price}
+                    </>
                 )}
-                {loading ? 'Processing...' : `Buy Now - ₹${price}`}
             </button>
+
+            <AuthModal
+                isOpen={showAuthModal}
+                onClose={() => setShowAuthModal(false)}
+            />
         </>
     );
 }

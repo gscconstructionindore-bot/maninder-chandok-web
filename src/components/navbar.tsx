@@ -3,14 +3,19 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/auth-context";
+import AuthModal from "@/components/auth-modal";
+import UserMenu from "@/components/user-menu";
 
 type Theme = "light" | "dark" | "system";
 
 export default function Navbar() {
+    const { user, isLoading } = useAuth();
     const [theme, setTheme] = useState<Theme>("light");
     const [mounted, setMounted] = useState(false);
     const [showThemeMenu, setShowThemeMenu] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -58,6 +63,11 @@ export default function Navbar() {
                             { href: "/gallery", label: "Gallery" },
                             { href: "/about", label: "About" },
                             { href: "/blog", label: "Blog" },
+                            { href: "/journey", label: "Journey" },
+                            // ...(user ? [
+                            //     { href: "/profile", label: "Profile" },
+                            //     { href: "/orders", label: "Orders" }
+                            // ] : [])
                         ].map((link) => (
                             <Link
                                 key={link.href}
@@ -142,20 +152,27 @@ export default function Navbar() {
                     {/* Divider */}
                     {/* <div className="hidden md:block w-px h-6 bg-gray-300 dark:bg-gray-700 mx-2" /> */}
 
-                    {/* CTA Button */}
+                    {/* CTA Button / User Menu */}
                     <motion.div
                         className="flex items-center"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.3, delay: 0.25 }}
                     >
-                        <motion.button
-                            className="bg-black dark:bg-white text-white dark:text-black px-5 py-2 rounded-full font-medium text-sm transition-all"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Get Started
-                        </motion.button>
+                        {isLoading ? (
+                            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 animate-pulse" />
+                        ) : user ? (
+                            <UserMenu />
+                        ) : (
+                            <motion.button
+                                onClick={() => setShowAuthModal(true)}
+                                className="bg-black dark:bg-white text-white dark:text-black px-5 py-2 rounded-full font-medium text-sm transition-all"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                Sign In
+                            </motion.button>
+                        )}
                     </motion.div>
 
                     {/* Mobile Menu Button */}
@@ -194,10 +211,11 @@ export default function Navbar() {
                         <div className="p-4 space-y-1">
                             {[
                                 { href: "/", label: "Home" },
-                                { href: "#programs", label: "Programs" },
+                                { href: "/products", label: "Ebooks" },
                                 { href: "/gallery", label: "Gallery" },
                                 { href: "/about", label: "About" },
                                 { href: "/blog", label: "Blog" },
+                                { href: "/journey", label: "Journey" },
                             ].map((link, index) => (
                                 <motion.div
                                     key={link.href}
@@ -218,6 +236,12 @@ export default function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Auth Modal */}
+            <AuthModal 
+                isOpen={showAuthModal} 
+                onClose={() => setShowAuthModal(false)} 
+            />
         </div>
     );
 }
