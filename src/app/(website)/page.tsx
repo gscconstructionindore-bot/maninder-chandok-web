@@ -1,4 +1,5 @@
 import Hero from "@/components/hero";
+import JourneySnapshot from "@/components/journey-snapshot";
 import SocialMedia from "@/components/social-media";
 import EbookSection from "@/components/ebook-section";
 import ScrollIndicator from "@/components/scroll-indicator";
@@ -58,6 +59,7 @@ export default async function Home() {
 	return (
 		<main className="min-h-screen bg-white dark:bg-gray-950">
 			<Hero />
+			<JourneySnapshot />
 			<QuotesSection />
 			<HomeCertificates images={recentCertificates} />
 			<ExpertiseSection />
