@@ -13,16 +13,16 @@ export const certificatesData: Certificate[] = [
     { id: "4", src: "/LIONS/cert-0005.jpg", title: "Service Leadership", category: "Lions Certificate intstitute" },
 
     // Faculty
-    { id: "5", src: "/LIONS/cert-0006.jpg", title: "Faculty Development", category: "faculty" },
-    { id: "6", src: "/LIONS/cert-0007.jpg", title: "Certified Trainer", category: "faculty" },
-    { id: "7", src: "/LIONS/cert-0008.jpg", title: "Regional Faculty", category: "faculty" },
-    { id: "8", src: "/LIONS/cert-0009.jpg", title: "District Faculty", category: "faculty" },
+    { id: "5", src: "/LIONS/cert-0006.jpg", title: "Faculty Development", category: "Faculty" },
+    { id: "6", src: "/LIONS/cert-0007.jpg", title: "Certified Trainer", category: "Faculty" },
+    { id: "7", src: "/LIONS/cert-0008.jpg", title: "Regional Faculty", category: "Faculty" },
+    { id: "8", src: "/LIONS/cert-0009.jpg", title: "District Faculty", category: "Faculty" },
 
     // Guiding Lions
-    { id: "9", src: "/LIONS/cert-0010.jpg", title: "Certified Guiding Lion", category: "guiding lions" },
-    { id: "10", src: "/LIONS/cert-0011.jpg", title: "Club Rebuilding", category: "guiding lions" },
-    { id: "11", src: "/LIONS/cert-0012.jpg", title: "New Club Mentor", category: "guiding lions" },
-    { id: "12", src: "/LIONS/cert-0013.jpg", title: "Succession Planning", category: "guiding lions" },
+    { id: "9", src: "/LIONS/cert-0010.jpg", title: "Certified Guiding Lion", category: "Guiding Lions" },
+    { id: "10", src: "/LIONS/cert-0011.jpg", title: "Club Rebuilding", category: "Guiding Lions" },
+    { id: "11", src: "/LIONS/cert-0012.jpg", title: "New Club Mentor", category: "Guiding Lions" },
+    { id: "12", src: "/LIONS/cert-0013.jpg", title: "Succession Planning", category: "Guiding Lions" },
 
     // Presidential Accolade
     { id: "13", src: "/LIONS/cert-0014.jpg", title: "Presidential Medal", category: "Presidential Accolade" },
@@ -44,8 +44,8 @@ export const certificatesData: Certificate[] = [
 
     // More Generic / Mixed
     { id: "25", src: "/LIONS/cert-0026.jpg", title: "District Appreciation", category: "Lions Certificate intstitute" },
-    { id: "26", src: "/LIONS/cert-0027.jpg", title: "Zone Chairperson", category: "faculty" },
-    { id: "27", src: "/LIONS/cert-0028.jpg", title: "Club President", category: "guiding lions" },
+    { id: "26", src: "/LIONS/cert-0027.jpg", title: "Zone Chairperson", category: "Faculty" },
+    { id: "27", src: "/LIONS/cert-0028.jpg", title: "Club President", category: "Guiding Lions" },
     { id: "28", src: "/LIONS/cert-0029.jpg", title: "Membership Growth", category: "Presidential Accolade" },
     { id: "29", src: "/LIONS/cert-0030.jpg", title: "Lions Quest", category: "ISAME" },
     { id: "30", src: "/LIONS/cert-0031.jpg", title: "Youth Exchange", category: "LCIF Conclave" }
