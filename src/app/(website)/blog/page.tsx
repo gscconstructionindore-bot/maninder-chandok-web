@@ -20,8 +20,10 @@ async function getBlogPosts() {
       title,
       slug,
       excerpt,
+      "category": category->title,
       coverImage,
-      publishedAt
+      publishedAt,
+      _createdAt
     }`
   );
   return posts;

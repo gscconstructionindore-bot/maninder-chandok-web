@@ -13,6 +13,7 @@ async function getBlogPost(slug: string) {
       title,
       slug,
       excerpt,
+      "category": category->title,
       coverImage,
       content,
       publishedAt,

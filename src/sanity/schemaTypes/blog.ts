@@ -16,6 +16,12 @@ export default defineType({
       options: { source: 'title' },
     }),
     defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: { type: 'category' },
+    }),
+    defineField({
       name: 'excerpt',
       type: 'text',
     }),

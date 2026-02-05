@@ -41,31 +41,31 @@ export default function Hero() {
                 {/* Rich gradient orbs with professional colors */}
                 <div className="absolute top-20 -left-32 w-[600px] h-[600px] bg-gradient-to-br from-indigo-200/40 via-blue-100/30 to-transparent dark:from-indigo-900/30 dark:via-blue-950/20 rounded-full blur-3xl" />
                 <div className="absolute bottom-20 -right-32 w-[700px] h-[700px] bg-gradient-to-tl from-purple-200/35 via-violet-100/25 to-transparent dark:from-purple-900/25 dark:via-violet-950/15 rounded-full blur-3xl" />
-                
+
                 {/* Accent orbs for depth */}
                 <div className="absolute top-1/3 right-1/4 w-[350px] h-[350px] bg-gradient-to-br from-cyan-200/20 to-transparent dark:from-cyan-900/15 rounded-full blur-2xl" />
-                
+
                 {/* Fine grid pattern */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e520_1px,transparent_1px),linear-gradient(to_bottom,#4f46e520_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#818cf820_1px,transparent_1px),linear-gradient(to_bottom,#818cf820_1px,transparent_1px)] bg-[size:80px_80px]" />
-                
+
                 {/* Professional accent lines with color */}
                 <div className="absolute top-1/4 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-indigo-500/30 dark:via-indigo-400/20 to-transparent" />
                 <div className="absolute bottom-1/3 right-0 w-3/4 h-0.5 bg-gradient-to-l from-transparent via-purple-500/25 dark:via-purple-400/18 to-transparent" />
-                
+
                 {/* Large statement geometric shapes with color */}
                 <div className="absolute top-32 right-24 w-48 h-48 border-[4px] border-indigo-500/30 dark:border-indigo-400/25 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
                 <div className="absolute bottom-32 left-28 w-40 h-40 border-[4px] border-purple-500/25 dark:border-purple-400/20 rotate-45 rounded-lg" />
-                
+
                 {/* Accent decorative shapes */}
                 <div className="absolute top-1/2 left-12 w-20 h-20 border-[3px] border-cyan-500/20 dark:border-cyan-400/15 rounded-full" />
                 <div className="absolute bottom-1/4 right-44 w-24 h-24 border-[3px] border-blue-500/22 dark:border-blue-400/18 rotate-12 rounded-lg" />
-                
+
                 {/* Small professional accent dots */}
                 <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-indigo-500/40 dark:bg-indigo-400/30 rounded-full animate-pulse" style={{ animationDuration: '3s' }} />
                 <div className="absolute bottom-1/2 left-1/4 w-2.5 h-2.5 bg-purple-500/35 dark:bg-purple-400/25 rounded-full" />
                 <div className="absolute top-2/3 left-1/3 w-2 h-2 bg-cyan-500/30 dark:bg-cyan-400/20 rounded-full animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '1s' }} />
                 <div className="absolute bottom-1/3 right-1/4 w-1.5 h-1.5 bg-blue-500/30 dark:bg-blue-400/20 rounded-full" />
-                
+
                 {/* Floating accent squares */}
                 <div className="absolute top-40 left-1/4 w-4 h-4 border-2 border-indigo-500/25 dark:border-indigo-400/20 rotate-45" />
                 <div className="absolute bottom-40 right-1/3 w-3 h-3 border-2 border-purple-500/25 dark:border-purple-400/20 rotate-12" />
@@ -73,7 +73,7 @@ export default function Hero() {
 
             <div className="flex flex-col-reverse md:flex-row items-center gap-20 md:gap-32">
                 {/* Text Content */}
-                <motion.div 
+                <motion.div
                     className="flex-1 space-y-6"
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -97,15 +97,15 @@ export default function Hero() {
                     </motion.div>
 
                     {/* Roles */}
-                    <motion.div 
+                    <motion.div
                         className="flex flex-wrap gap-2"
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         style={{ willChange: 'transform, opacity' }}
                     >
-                        {["Author", "Poet", "Motivational Speaker", "Life Coach"].map((role, index) => (
-                            <span 
+                        {["Author", "Influencer", "Motivational Speaker", "Life Coach"].map((role, index) => (
+                            <span
                                 key={index}
                                 className="px-4 py-1.5 text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
                             >
@@ -115,7 +115,7 @@ export default function Hero() {
                     </motion.div>
 
                     {/* Tagline */}
-                    <motion.div 
+                    <motion.div
                         className="space-y-3 pt-2"
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -127,13 +127,13 @@ export default function Hero() {
                         </p>
 
                         <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-xl leading-relaxed">
-                            Empowering individuals through words, wisdom, and life appreciation. 
+                            Empowering individuals through words, wisdom, and life appreciation.
                             Discover the path to personal growth and meaningful living.
                         </p>
                     </motion.div>
 
                     {/* CTA */}
-                    <motion.div 
+                    <motion.div
                         className="flex flex-col sm:flex-row gap-4 items-start pt-4"
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -155,7 +155,7 @@ export default function Hero() {
                             </svg>
                         </a>
 
-                        <button 
+                        <button
                             className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full font-semibold text-indigo-700 dark:text-indigo-300 border-2 border-indigo-400/50 dark:border-indigo-600/50 hover:border-indigo-500 dark:hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 transition-all cursor-pointer"
                         >
                             Explore Work
@@ -163,7 +163,7 @@ export default function Hero() {
                     </motion.div>
 
                     {/* Social Media Links */}
-                    <motion.div 
+                    <motion.div
                         className="flex items-center gap-3 pt-2"
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -193,7 +193,7 @@ export default function Hero() {
                 </motion.div>
 
                 {/* Image Content */}
-                <motion.div 
+                <motion.div
                     className="flex-1 relative w-full max-w-sm md:max-w-md aspect-[3/4]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

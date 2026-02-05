@@ -20,6 +20,7 @@ interface BlogPost {
   title: string;
   slug: { current: string };
   excerpt: string;
+  category?: string;
   coverImage: any;
   content: any[];
   publishedAt: string;
@@ -232,10 +233,10 @@ export default function BlogPost({ post }: BlogPostProps) {
   const dateToFormat = post.publishedAt || post._createdAt;
   const formattedDate = dateToFormat
     ? new Date(dateToFormat).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
     : 'Date not available';
 
   return (
@@ -281,10 +282,20 @@ export default function BlogPost({ post }: BlogPostProps) {
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden"
             >
               <div className="p-8 sm:p-12">
-                {/* Date */}
-                <time className="text-sm text-gray-500 dark:text-gray-400">
-                  {formattedDate}
-                </time>
+                {/* Date and Category */}
+                <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  <time>
+                    {formattedDate}
+                  </time>
+                  {post.category && (
+                    <>
+                      <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
+                        {post.category}
+                      </span>
+                    </>
+                  )}
+                </div>
 
                 {/* Title */}
                 <h1 className="text-4xl sm:text-5xl font-bold mt-4 mb-6 text-gray-900 dark:text-white">
@@ -316,7 +327,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                   <PortableText value={post.content} components={portableTextComponents} />
                 </div>
               </div>
-        </motion.article>
+            </motion.article>
           </div>
 
           {/* Sidebar - Right Column */}
@@ -339,11 +350,10 @@ export default function BlogPost({ post }: BlogPostProps) {
                     whileTap={{ scale: 0.98 }}
                     onClick={handleLike}
                     disabled={isLiking}
-                    className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all ${
-                      isLiked
+                    className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg transition-all ${isLiked
                         ? 'bg-red-600 text-white hover:bg-red-700'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-                    } ${isLiking ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      } ${isLiking ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     {isLiking ? (
                       <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -528,9 +538,8 @@ export default function BlogPost({ post }: BlogPostProps) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors ${
-                      isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
+                    className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                      }`}
                   >
                     {isSubmitting && (
                       <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">

@@ -4,6 +4,8 @@ import { product } from './product'
 import order from './order'
 import user from './user'
 
+import category from './category'
+
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blog, product, order, user],
+  types: [blog, product, order, user, category],
 }

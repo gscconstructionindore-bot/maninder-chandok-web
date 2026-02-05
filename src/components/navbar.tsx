@@ -64,6 +64,7 @@ export default function Navbar() {
                             { href: "/about", label: "About" },
                             { href: "/blog", label: "Blog" },
                             { href: "/journey", label: "Journey" },
+                            { href: "/homestay", label: "Homestay" },
                             // ...(user ? [
                             //     { href: "/profile", label: "Profile" },
                             //     { href: "/orders", label: "Orders" }
@@ -216,6 +217,7 @@ export default function Navbar() {
                                 { href: "/about", label: "About" },
                                 { href: "/blog", label: "Blog" },
                                 { href: "/journey", label: "Journey" },
+                                { href: "/homestay", label: "Homestay" },
                             ].map((link, index) => (
                                 <motion.div
                                     key={link.href}
@@ -238,9 +240,9 @@ export default function Navbar() {
             </AnimatePresence>
 
             {/* Auth Modal */}
-            <AuthModal 
-                isOpen={showAuthModal} 
-                onClose={() => setShowAuthModal(false)} 
+            <AuthModal
+                isOpen={showAuthModal}
+                onClose={() => setShowAuthModal(false)}
             />
         </div>
     );
