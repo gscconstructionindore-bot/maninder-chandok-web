@@ -6,8 +6,8 @@ import { journeyData } from "@/data/journey-data";
 import { ArrowRight } from "lucide-react";
 
 export default function JourneySnapshot() {
-    // Get the last 3 items for the snapshot
-    const recentJourney = journeyData.slice(-3).reverse();
+    // Get the first 3 items (most recent) for the snapshot
+    const recentJourney = journeyData.slice(0, 3);
 
     return (
         <section className="py-20 bg-gray-50 dark:bg-gray-900/50 relative overflow-hidden">

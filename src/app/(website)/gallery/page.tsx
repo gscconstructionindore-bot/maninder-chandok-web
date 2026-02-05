@@ -4,9 +4,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
+import { ChevronDown, Filter, Check } from "lucide-react";
 
 export default function GalleryPage() {
     const [activeCategory, setActiveCategory] = useState("All");
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const categories = [
         "All",
@@ -60,21 +62,54 @@ export default function GalleryPage() {
                 </motion.div>
             </section>
 
-            {/* Category Filter */}
-            <section className="px-4 sm:px-6 lg:px-8 mb-12">
-                <div className="flex flex-wrap justify-center gap-2 md:gap-4 max-w-5xl mx-auto">
-                    {categories.map((category, index) => (
-                        <button
-                            key={category}
-                            onClick={() => setActiveCategory(category)}
-                            className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${activeCategory === category
-                                ? "bg-[#CE1117] text-white shadow-lg scale-105"
-                                : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                                }`}
+            {/* Category Filter Dropdown */}
+            <section className="px-4 sm:px-6 lg:px-8 mb-12 relative z-20">
+                <div className="flex justify-center">
+                    <div className="relative">
+                        <motion.button
+                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg hover:shadow-xl transition-all text-gray-700 dark:text-gray-200"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                         >
-                            {category}
-                        </button>
-                    ))}
+                            <Filter className="w-4 h-4 text-[#CE1117]" />
+                            <span className="font-medium">Filter: {activeCategory}</span>
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isFilterOpen ? 'rotate-180' : ''}`} />
+                        </motion.button>
+
+                        <AnimatePresence>
+                            {isFilterOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden p-2"
+                                >
+                                    <div className="flex flex-col gap-1 max-h-64 overflow-y-auto custom-scrollbar">
+                                        {categories.map((category) => (
+                                            <button
+                                                key={category}
+                                                onClick={() => {
+                                                    setActiveCategory(category);
+                                                    setIsFilterOpen(false);
+                                                }}
+                                                className={`flex items-center justify-between w-full px-4 py-2.5 text-sm rounded-lg transition-colors ${activeCategory === category
+                                                    ? "bg-red-50 dark:bg-red-900/20 text-[#CE1117] dark:text-red-400 font-medium"
+                                                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                                                    }`}
+                                            >
+                                                <span>{category}</span>
+                                                {activeCategory === category && (
+                                                    <Check className="w-4 h-4" />
+                                                )}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </div>
             </section>
 
