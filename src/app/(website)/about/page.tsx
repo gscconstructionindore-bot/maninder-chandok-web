@@ -1,9 +1,8 @@
-import Image from 'next/image';
-import fs from 'fs';
-import path from 'path';
+import { certificatesData } from '@/data/certificates';
 import CertificateGallery from '@/components/certificate-gallery';
 import Newsletter from '@/components/newsletter';
 import AboutSocials from '@/components/about-socials';
+import Image from 'next/image';
 
 export const metadata = {
     title: 'About | Maninder Singh Chandok',
@@ -14,22 +13,7 @@ export const metadata = {
     },
 };
 
-async function getCertificates() {
-    const lionsDir = path.join(process.cwd(), 'public/LIONS');
-
-    try {
-        const files = await fs.promises.readdir(lionsDir);
-        const images = files.filter(file => /\.(jpg|jpeg|png|webp|avif)$/i.test(file));
-        return images.map(file => `/LIONS/${file}`);
-    } catch (error) {
-        console.error('Error reading certificate directory:', error);
-        return [];
-    }
-}
-
-export default async function AboutPage() {
-    const certificates = await getCertificates();
-
+export default function AboutPage() {
     return (
         <main className="min-h-screen bg-white dark:bg-gray-950 pt-32 pb-16">
             {/* Bio Section */}
@@ -38,7 +22,7 @@ export default async function AboutPage() {
                     {/* Image Placeholder */}
                     <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800 shadow-xl">
                         <Image
-                            src="/hero.png" // Fallback to hero image if specific about image is missing
+                            src="/hero.png"
                             alt="Maninder Singh Chandok"
                             fill
                             className="object-cover"
@@ -74,7 +58,7 @@ export default async function AboutPage() {
                     </p>
                 </div>
 
-                <CertificateGallery images={certificates} />
+                <CertificateGallery certificates={certificatesData} />
             </section>
             <div className="mt-16"></div>
             <Newsletter />
