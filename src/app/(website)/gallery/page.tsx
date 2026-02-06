@@ -1,17 +1,11 @@
 
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
-import { ChevronDown, Filter, Check } from "lucide-react";
 
 export default function GalleryPage() {
-    const [activeCategory, setActiveCategory] = useState("All");
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
-
     const categories = [
-        "All",
         "Lions",
         "Family",
         "National Travel",
@@ -37,14 +31,10 @@ export default function GalleryPage() {
         { id: 13, src: "https://placehold.co/800x600/222222/FFFFFF/png?text=Podcast+Guest", alt: "Interview Session", width: 800, height: 600, category: "Podcast" },
     ];
 
-    const filteredItems = activeCategory === "All"
-        ? galleryItems
-        : galleryItems.filter(item => item.category === activeCategory);
-
     return (
         <main className="min-h-screen bg-white dark:bg-gray-950 pt-24 md:pt-32 pb-16 overflow-x-hidden">
             {/* Header Section */}
-            <section className="relative px-4 sm:px-6 lg:px-8 mb-12 text-center">
+            <section className="relative px-4 sm:px-6 lg:px-8 mb-16 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -62,106 +52,62 @@ export default function GalleryPage() {
                 </motion.div>
             </section>
 
-            {/* Category Filter Dropdown */}
-            <section className="px-4 sm:px-6 lg:px-8 mb-12 relative z-20">
-                <div className="flex justify-center">
-                    <div className="relative">
-                        <motion.button
-                            onClick={() => setIsFilterOpen(!isFilterOpen)}
-                            className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full shadow-lg hover:shadow-xl transition-all text-gray-700 dark:text-gray-200"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                        >
-                            <Filter className="w-4 h-4 text-[#CE1117]" />
-                            <span className="font-medium">Filter: {activeCategory}</span>
-                            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isFilterOpen ? 'rotate-180' : ''}`} />
-                        </motion.button>
+            {/* Gallery Sections */}
+            <div className="space-y-24">
+                {categories.map((category, index) => {
+                    const categoryItems = galleryItems.filter(item => item.category === category);
 
-                        <AnimatePresence>
-                            {isFilterOpen && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden p-2"
-                                >
-                                    <div className="flex flex-col gap-1 max-h-64 overflow-y-auto custom-scrollbar">
-                                        {categories.map((category) => (
-                                            <button
-                                                key={category}
-                                                onClick={() => {
-                                                    setActiveCategory(category);
-                                                    setIsFilterOpen(false);
-                                                }}
-                                                className={`flex items-center justify-between w-full px-4 py-2.5 text-sm rounded-lg transition-colors ${activeCategory === category
-                                                    ? "bg-red-50 dark:bg-red-900/20 text-[#CE1117] dark:text-red-400 font-medium"
-                                                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
-                                                    }`}
-                                            >
-                                                <span>{category}</span>
-                                                {activeCategory === category && (
-                                                    <Check className="w-4 h-4" />
-                                                )}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-                </div>
-            </section>
+                    if (categoryItems.length === 0) return null;
 
-            {/* Gallery Grid */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    layout
-                    className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6"
-                >
-                    <AnimatePresence mode="popLayout">
-                        {filteredItems.map((item) => (
+                    return (
+                        <section key={category} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <motion.div
-                                layout
-                                key={item.id}
-                                className="break-inside-avoid rounded-2xl overflow-hidden group w-full"
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.4 }}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5 }}
+                                className="mb-8 flex items-center gap-4"
                             >
-                                <div className="relative overflow-hidden">
-                                    <Image
-                                        src={item.src}
-                                        alt={item.alt}
-                                        width={item.width}
-                                        height={item.height}
-                                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
-                                        unoptimized
-                                    />
-
-                                    {/* Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                                        <span className="text-[#CE1117] text-xs font-bold uppercase tracking-wider mb-1">
-                                            {item.category}
-                                        </span>
-                                        <h3 className="text-white text-lg font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                                            {item.alt}
-                                        </h3>
-                                        <div className="w-12 h-1 bg-[#CE1117] mt-3 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                                    </div>
-                                </div>
+                                <div className="h-px bg-gray-200 dark:bg-gray-800 flex-grow max-w-[50px]"></div>
+                                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                                    {category}
+                                </h2>
+                                <div className="h-px bg-gray-200 dark:bg-gray-800 flex-grow"></div>
                             </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
 
-                {filteredItems.length === 0 && (
-                    <div className="text-center py-20 text-gray-500 dark:text-gray-400">
-                        No images found for this category.
-                    </div>
-                )}
-            </section>
+                            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                                {categoryItems.map((item) => (
+                                    <motion.div
+                                        key={item.id}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5 }}
+                                        className="break-inside-avoid rounded-2xl overflow-hidden group relative"
+                                    >
+                                        <Image
+                                            src={item.src}
+                                            alt={item.alt}
+                                            width={item.width}
+                                            height={item.height}
+                                            className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                                            unoptimized
+                                        />
+
+                                        {/* Overlay */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                            <h3 className="text-white text-lg font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                                {item.alt}
+                                            </h3>
+                                            <div className="w-12 h-1 bg-[#CE1117] mt-3 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </section>
+                    );
+                })}
+            </div>
         </main>
     );
 }
