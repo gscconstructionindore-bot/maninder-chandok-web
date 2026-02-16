@@ -3,6 +3,7 @@ import BlogPost from "@/components/blog-post";
 import { notFound } from "next/navigation";
 import { Metadata, ResolvingMetadata } from "next";
 import { urlFor } from "@/sanity/lib/image";
+import { portableTextToMarkdown } from "@portabletext/markdown";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -23,6 +24,10 @@ async function getBlogPost(slug: string) {
     }`,
     { slug }
   );
+
+  if (post?.content) {
+    post.content = await portableTextToMarkdown(post.content);
+  }
 
   return post;
 }

@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { PortableText, PortableTextComponents } from '@portabletext/react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 import { urlFor } from '@/sanity/lib/image';
 import { ArrowLeft, Check, Facebook, Link2, Linkedin, MessageSquare, Twitter } from 'lucide-react';
 
@@ -22,7 +24,7 @@ interface BlogPost {
   excerpt: string;
   category?: string;
   coverImage: any;
-  content: any[];
+  content: string;
   publishedAt: string;
   _createdAt: string;
   likes: number;
@@ -39,95 +41,6 @@ interface ApiResponse {
   comment?: Comment;
   message?: string;
 }
-
-const portableTextComponents: PortableTextComponents = {
-  block: {
-    h1: ({ children }) => (
-      <h1 className="text-4xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
-        {children}
-      </h1>
-    ),
-    h2: ({ children }) => (
-      <h2 className="text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }) => (
-      <h3 className="text-2xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">
-        {children}
-      </h3>
-    ),
-    h4: ({ children }) => (
-      <h4 className="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">
-        {children}
-      </h4>
-    ),
-    normal: ({ children }) => (
-      <p className="text-lg leading-relaxed mb-4 text-gray-700 dark:text-gray-300">
-        {children}
-      </p>
-    ),
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-red-600 pl-4 my-6 italic text-gray-700 dark:text-gray-300">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }) => (
-      <ul className="list-disc list-inside mb-4 space-y-2 text-gray-700 dark:text-gray-300">
-        {children}
-      </ul>
-    ),
-    number: ({ children }) => (
-      <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-700 dark:text-gray-300">
-        {children}
-      </ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }) => <li className="ml-4">{children}</li>,
-    number: ({ children }) => <li className="ml-4">{children}</li>,
-  },
-  marks: {
-    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
-    em: ({ children }) => <em className="italic">{children}</em>,
-    link: ({ value, children }) => {
-      const target = (value?.href || '').startsWith('http') ? '_blank' : undefined;
-      return (
-        <a
-          href={value?.href}
-          target={target}
-          rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-          className="text-red-600 hover:text-red-700 underline"
-        >
-          {children}
-        </a>
-      );
-    },
-  },
-  types: {
-    image: ({ value }) => {
-      if (!value?.asset) return null;
-      return (
-        <div className="my-8">
-          <Image
-            src={urlFor(value).url()}
-            alt={value.alt || 'Blog image'}
-            width={800}
-            height={600}
-            className="rounded-lg w-full h-auto"
-          />
-          {value.caption && (
-            <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
-              {value.caption}
-            </p>
-          )}
-        </div>
-      );
-    },
-  },
-};
 
 export default function BlogPost({ post }: BlogPostProps) {
   const [isLiked, setIsLiked] = useState(false);
@@ -324,7 +237,11 @@ export default function BlogPost({ post }: BlogPostProps) {
 
                 {/* Content */}
                 <div className="prose prose-lg dark:prose-invert max-w-none">
-                  <PortableText value={post.content} components={portableTextComponents} />
+                  <ReactMarkdown
+                    rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                  >
+                    {post.content}
+                  </ReactMarkdown>
                 </div>
               </div>
             </motion.article>
