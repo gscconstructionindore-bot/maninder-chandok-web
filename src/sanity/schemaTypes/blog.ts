@@ -13,7 +13,16 @@ export default defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      options: { source: 'title' },
+      options: {
+        source: 'title',
+        maxLength: 96,
+        slugify: input =>
+          input
+            .toLowerCase()
+            .replace(/[^\p{L}\p{N}]+/gu, '-')
+            .replace(/(^-|-$)+/g, '')
+            .slice(0, 96),
+      },
     }),
     defineField({
       name: 'category',
