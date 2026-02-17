@@ -104,7 +104,7 @@ export default function Hero() {
                         transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         style={{ willChange: 'transform, opacity' }}
                     >
-                        {["Author", "Influencer", "Motivational Speaker", "Life Coach"].map((role, index) => (
+                        {["Author", "Influencer", "Mentor", "Life Coach"].map((role, index) => (
                             <span
                                 key={index}
                                 className="px-4 py-1.5 text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
