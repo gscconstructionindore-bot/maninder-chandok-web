@@ -5,7 +5,9 @@ import order from './order'
 import user from './user'
 
 import category from './category'
+import galleryCategory from './galleryCategory'
+import galleryPhoto from './galleryPhoto'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [blog, product, order, user, category],
+  types: [blog, product, order, user, category, galleryCategory, galleryPhoto],
 }
