@@ -236,9 +236,21 @@ export default function BlogPost({ post }: BlogPostProps) {
                 )}
 
                 {/* Content */}
-                <div className="prose prose-lg dark:prose-invert max-w-none">
+                <div className="prose prose-xl dark:prose-invert max-w-none">
                   <ReactMarkdown
                     rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                    components={{
+                      p: ({ children, ...props }) => (
+                        <p className="text-xl leading-8 my-4" {...props}>
+                          {children}
+                        </p>
+                      ),
+                      li: ({ children, ...props }) => (
+                        <li className="text-xl leading-8" {...props}>
+                          {children}
+                        </li>
+                      ),
+                    }}
                   >
                     {post.content}
                   </ReactMarkdown>
