@@ -85,7 +85,7 @@ export default function BlogList({ posts }: BlogListProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            Blog
+            Blogs
           </motion.h1>
 
           {/* Description */}
@@ -165,7 +165,7 @@ export default function BlogList({ posts }: BlogListProps) {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
               >
-                <Link href={`/blog/${post.slug.current}`}>
+                <Link href={`/blogs/${post.slug.current}`}>
                   <motion.div
                     className="group relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-200 dark:border-gray-800 h-full flex flex-col"
                     whileHover={{ y: -8 }}
