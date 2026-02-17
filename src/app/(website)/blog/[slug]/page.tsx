@@ -5,7 +5,8 @@ import { Metadata, ResolvingMetadata } from "next";
 import { urlFor } from "@/sanity/lib/image";
 import { portableTextToMarkdown } from "@portabletext/markdown";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamic = "force-dynamic";
+export const revalidate = 0; // Disable static prerendering for long slugs
 
 async function getBlogPost(slug: string) {
   const post = await client.fetch(
@@ -30,16 +31,6 @@ async function getBlogPost(slug: string) {
   }
 
   return post;
-}
-
-export async function generateStaticParams() {
-  const posts = await client.fetch(
-    `*[_type == "blog"]{ "slug": slug.current }`
-  );
-
-  return posts.map((post: any) => ({
-    slug: post.slug,
-  }));
 }
 
 export async function generateMetadata(
