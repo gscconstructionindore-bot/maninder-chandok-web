@@ -174,7 +174,7 @@ export default function BlogPost({ post }: BlogPostProps) {
           className="mb-8"
         >
           <Link
-            href="/blog"
+            href="/blogs"
             className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
