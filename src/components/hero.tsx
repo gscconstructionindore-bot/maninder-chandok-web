@@ -202,7 +202,7 @@ export default function Hero() {
                 >
                     <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-gray-100 dark:bg-gray-900">
                         <Image
-                            src="/hero.png"
+                            src="/hero.jpg"
                             alt="Professional Corporate Trainer"
                             fill
                             priority

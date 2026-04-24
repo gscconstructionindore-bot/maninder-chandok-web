@@ -22,7 +22,7 @@ export default function AboutPage() {
                     {/* Image Placeholder */}
                     <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-gray-200 dark:bg-gray-800 shadow-xl">
                         <Image
-                            src="/hero.png"
+                            src="/hero.jpg"
                             alt="Maninder Singh Chandok"
                             fill
                             className="object-cover"
