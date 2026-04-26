@@ -41,7 +41,7 @@ const navigationLinks = [
     { href: "/about", label: "About" },
     { href: "/gallery", label: "Gallery" },
     { href: "/products", label: "Products" },
-    { href: "/blog", label: "Blog" },
+    { href: "/blogs", label: "Blogs" },
 ];
 
 const socialLinks = [

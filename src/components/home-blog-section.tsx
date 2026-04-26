@@ -56,7 +56,7 @@ export default function HomeBlogSection({ posts }: HomeBlogSectionProps) {
                     </div>
 
                     <Link
-                        href="/blog"
+                        href="/blogs"
                         className="group flex items-center gap-2 text-sm font-semibold text-[#CE1117] hover:text-[#a80e13] transition-colors"
                     >
                         View All Articles
@@ -75,7 +75,7 @@ export default function HomeBlogSection({ posts }: HomeBlogSectionProps) {
                             className="group flex flex-col h-full bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-xl transition-all duration-300"
                         >
                             {/* Image */}
-                            <Link href={`/blog/${post.slug.current}`} className="relative aspect-[16/10] overflow-hidden">
+                            <Link href={`/blogs/${post.slug.current}`} className="relative aspect-[16/10] overflow-hidden">
                                 {post.coverImage && (
                                     <Image
                                         src={urlFor(post.coverImage).url()}
@@ -100,7 +100,7 @@ export default function HomeBlogSection({ posts }: HomeBlogSectionProps) {
                                     </div>
                                 </div>
 
-                                <Link href={`/blog/${post.slug.current}`} className="block mb-3">
+                                <Link href={`/blogs/${post.slug.current}`} className="block mb-3">
                                     <h3 className="text-xl font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-[#CE1117] transition-colors">
                                         {post.title}
                                     </h3>
@@ -111,7 +111,7 @@ export default function HomeBlogSection({ posts }: HomeBlogSectionProps) {
                                 </p>
 
                                 <Link
-                                    href={`/blog/${post.slug.current}`}
+                                    href={`/blogs/${post.slug.current}`}
                                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#CE1117] hover:text-[#a80e13] transition-colors"
                                 >
                                     Read Article

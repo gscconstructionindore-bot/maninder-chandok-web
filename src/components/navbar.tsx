@@ -215,7 +215,7 @@ export default function Navbar() {
                                 { href: "/products", label: "Ebooks" },
                                 { href: "/gallery", label: "Gallery" },
                                 { href: "/about", label: "About" },
-                                { href: "/blog", label: "Blog" },
+                                { href: "/blogs", label: "Blogs" },
                                 { href: "/journey", label: "Journey" },
                                 { href: "/homestay", label: "Homestay" },
                             ].map((link, index) => (

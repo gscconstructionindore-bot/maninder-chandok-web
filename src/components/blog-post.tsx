@@ -411,7 +411,7 @@ export default function BlogPost({ post }: BlogPostProps) {
                   More Articles
                 </h3>
                 <Link
-                  href="/blog"
+                  href="/blogs"
                   className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-white text-red-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
                 >
                   <ArrowLeft className="w-5 h-5" />
@@ -524,7 +524,7 @@ export default function BlogPost({ post }: BlogPostProps) {
           className="text-center"
         >
           <Link
-            href="/blog"
+            href="/blogs"
             className="inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold shadow-lg hover:shadow-xl"
           >
             <ArrowLeft className="w-5 h-5" />
