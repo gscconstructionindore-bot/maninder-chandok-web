@@ -59,12 +59,14 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center gap-1">
                         {[
                             { href: "/", label: "Home" },
-                            { href: "/products", label: "Ebooks" },
-                            { href: "/gallery", label: "Gallery" },
                             { href: "/about", label: "About" },
-                            { href: "/blogs", label: "Blogs" },
                             { href: "/journey", label: "Journey" },
+                            { href: "/gallery", label: "Gallery" },
+                            { href: "/blogs", label: "Blogs" },
+                            { href: "/products", label: "Ebooks" },
                             { href: "/homestay", label: "Homestay" },
+                            { href: "/gsc-pharma", label: "GSC Pharma" },
+                            { href: "/contact", label: "Contact" },
                             // ...(user ? [
                             //     { href: "/profile", label: "Profile" },
                             //     { href: "/orders", label: "Orders" }
@@ -212,12 +214,14 @@ export default function Navbar() {
                         <div className="p-4 space-y-1">
                             {[
                                 { href: "/", label: "Home" },
-                                { href: "/products", label: "Ebooks" },
-                                { href: "/gallery", label: "Gallery" },
                                 { href: "/about", label: "About" },
-                                { href: "/blogs", label: "Blogs" },
                                 { href: "/journey", label: "Journey" },
+                                { href: "/gallery", label: "Gallery" },
+                                { href: "/blogs", label: "Blogs" },
+                                { href: "/products", label: "Ebooks" },
                                 { href: "/homestay", label: "Homestay" },
+                                { href: "/gsc-pharma", label: "GSC Pharma" },
+                                { href: "/contact", label: "Contact" },
                             ].map((link, index) => (
                                 <motion.div
                                     key={link.href}
