@@ -132,7 +132,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
-                                    placeholder="+91 9876543210"
+                                    placeholder="+91 94253 11458"
                                 />
                             </div>
                         </>

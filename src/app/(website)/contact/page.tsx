@@ -103,8 +103,8 @@ export default function ContactPage() {
                                 {
                                     icon: <Phone className="w-5 h-5 text-[#CE1117]" />,
                                     label: "Phone",
-                                    value: "+91 98765 43210",
-                                    href: "tel:+919876543210",
+                                    value: "+91 94253 11458",
+                                    href: "tel:+919425311458",
                                 },
                                 {
                                     icon: <MapPin className="w-5 h-5 text-[#CE1117]" />,
