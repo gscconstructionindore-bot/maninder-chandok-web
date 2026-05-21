@@ -18,13 +18,13 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Link href={`/products/${product.slug.current}`} className="group block h-full">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden h-full transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border border-gray-100 dark:border-gray-700">
                 {/* Image Container */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
+                <div className="relative aspect-[2/3] w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
                     {product.coverImage ? (
                         <Image
-                            src={urlFor(product.coverImage).width(600).height(450).url()}
+                            src={urlFor(product.coverImage).url()}
                             alt={product.title}
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-contain transition-transform duration-500 group-hover:scale-105"
                         />
                     ) : (
                         <div className="flex items-center justify-center h-full text-gray-400">No Image</div>
