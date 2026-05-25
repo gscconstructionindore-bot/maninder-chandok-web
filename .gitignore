@@ -32,7 +32,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
 !.env.example
 
 # vercel
@@ -50,7 +49,6 @@ next-env.d.ts
 .dev.vars*
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
@@ -63,3 +61,4 @@ next-env.d.ts
 .sanity/
 
 !.dev.vars.example
+config.bat
