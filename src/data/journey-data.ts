@@ -1,5 +1,5 @@
 export const journeyData = [
-    { year: "2025–Present", title: "GLT", description: "Global Leadership Team." },
+    { year: "2025–Present", title: "DT Coordinator – GLT", description: "Global Leadership Team." },
     { year: "2024–25", title: "DT Coordinator – GST", description: "Global Service Team Coordinator, focusing on impact." },
     { year: "2023–24", title: "DT Coordinator – GMT", description: "Driving membership growth and engagement." },
     { year: "2022–23", title: "DT Coordinator – GLT", description: "Continuing excellence in leadership development." },
