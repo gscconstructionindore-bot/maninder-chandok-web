@@ -2,6 +2,9 @@
 import { client } from "@/sanity/lib/client";
 import GalleryLightbox, { GalleryCategoryData } from "@/components/gallery-lightbox";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 async function getGalleryData() {
   return client.fetch<GalleryCategoryData[]>(
     `*[_type == "galleryCategory"] | order(orderRank asc, title asc) {
@@ -13,7 +16,9 @@ async function getGalleryData() {
         alt,
         image
       }
-    }`
+    }`,
+    {},
+    { cache: "no-store" }
   );
 }
 
